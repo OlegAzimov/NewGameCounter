@@ -22,9 +22,9 @@ public class AddToGameListValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         Game game = (Game) target;
-//        if(engineService.findGameByGameName(game.getGameName()) != null){
+       if(engineService.findGameByGameName(game.getGameName()) != null){
             errors.rejectValue("gameName", "", "Эта игра уже занесена в список");
         }
 
-//    }
+   }
 }
