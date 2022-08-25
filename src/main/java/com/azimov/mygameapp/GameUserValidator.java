@@ -1,19 +1,16 @@
 package com.azimov.mygameapp;
 
 import com.azimov.mygameapp.models.GameUser;
-import com.azimov.mygameapp.services.GameUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import com.azimov.mygameapp.services.GameUsersService;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 @Component
 public class GameUserValidator implements Validator {
-    private final GameUserDetailsService gameUserDetailsService;
+    private final GameUsersService gameUsersService;
 
-    @Autowired
-    public GameUserValidator(GameUserDetailsService gameUserDetailsService) {
-        this.gameUserDetailsService = gameUserDetailsService;
+    public GameUserValidator(GameUsersService gameUsersService) {
+        this.gameUsersService = gameUsersService;
     }
 
     @Override
@@ -23,15 +20,12 @@ public class GameUserValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        GameUser gameUser =(GameUser) target;
-        try {
-            gameUserDetailsService.loadUserByUsername(gameUser.getUsername());
-        } catch (UsernameNotFoundException ignored){
-            return;
+        GameUser gameUser = (GameUser) target;
+        if (gameUsersService.findUserByUsername(gameUser) != null) {
+
+            errors.rejectValue("username", "", "Пользователь с таким именем уже существует");
+
+
         }
-        errors.rejectValue("username", "", "Пользователь с таким именем уже существует");
-
-
-
     }
 }
