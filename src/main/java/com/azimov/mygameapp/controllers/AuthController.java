@@ -37,8 +37,9 @@ public class AuthController {
                                       BindingResult bindingResult){
         gameUserValidator.validate(gameUser, bindingResult);
 
-        if(bindingResult.hasErrors())
-            return "/auth/registration";
+        if(bindingResult.hasErrors()){
+            System.out.println("BINDING RESULT ERROR");
+            return "/auth/registration";}
         registrationService.register(gameUser);
 
         return "redirect:/auth/login";
