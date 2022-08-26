@@ -14,4 +14,5 @@ public interface ScoreRepository extends JpaRepository<Score, Integer> {
 
     List<Score> findByOwner(PlayedGame playedGame);
 
+
 }

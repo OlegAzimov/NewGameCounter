@@ -21,7 +21,7 @@ public class GameUserValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         GameUser gameUser = (GameUser) target;
-        if (gameUsersService.findUserByUsername(gameUser) != null) {
+        if (gameUsersService.findUserByUsername(gameUser).isPresent()) {
 
             errors.rejectValue("username", "", "Пользователь с таким именем уже существует");
 
