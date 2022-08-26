@@ -1,8 +1,7 @@
 package com.azimov.mygameapp.services;
 
 import com.azimov.mygameapp.models.GameUser;
-import com.azimov.mygameapp.repositories.GameUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.azimov.mygameapp.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,12 +10,13 @@ import java.util.Optional;
 @Service
 @Transactional(readOnly = true)
 public class GameUsersService {
-    private final GameUserRepository gameUserRepository;
-    @Autowired
-    public GameUsersService(GameUserRepository gameUserRepository) {
-        this.gameUserRepository = gameUserRepository;
+    private final UserRepository userRepository;
+
+    public GameUsersService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
-    public Optional<GameUser> findUserByUsername(GameUser gameUser){
-        return gameUserRepository.findByUsername(gameUser.getUsername());
+
+    public GameUser findUserByUsername(String username){
+        return userRepository.findByUsername(username);
     }
 }
