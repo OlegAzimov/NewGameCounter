@@ -5,6 +5,7 @@ import com.azimov.mygameapp.models.GameUser;
 import com.azimov.mygameapp.services.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -34,11 +35,12 @@ public class AuthController {
     }
     @PostMapping("/registration")
     public String performRegistration(@ModelAttribute("gameUser") @Valid GameUser gameUser,
-                                      BindingResult bindingResult){
+                                      BindingResult bindingResult, Model model){
         gameUserValidator.validate(gameUser, bindingResult);
 
         if(bindingResult.hasErrors()){
             System.out.println("BINDING RESULT ERROR");
+            model.addAttribute("gameUser", gameUser);
             return "/auth/registration";}
         registrationService.register(gameUser);
 
