@@ -41,7 +41,7 @@ public class AuthController {
         if(bindingResult.hasErrors()){
             System.out.println("BINDING RESULT ERROR");
             model.addAttribute("gameUser", gameUser);
-            return "/auth/registration";}
+            return "/auth/registration.html";}
         registrationService.register(gameUser);
 
         return "redirect:/auth/login";
