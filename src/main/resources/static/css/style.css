@@ -18,8 +18,8 @@ header{
     box-shadow:5px 5px 5px #babbbc;
     background-image: url("../img/filter_back15.png");
     border-radius: 15px;
-    width: 25%;
     margin-bottom: 5%;
+    width: fit-content;
 
 }
 btn btn-warning{
