@@ -29,15 +29,13 @@
 <header>
     <p class="text1">SIGN UP</p>
 </header>
-
+<div class="container">
 <div class="image">
-    <img src="\img\dice2.png" width="200px">
+    <img src="\img\dice2.png" width="150px">
 </div>
 
 <form class="form-container" th:method="POST" th:action="@{/auth/registration}" th:object="${gameUser}">
-    <div class="container">
-        <div class="col-6">
-            <div class="form-floating mb-3">
+    <div class="form-floating mb-3">
     <input type="text" class="form-control" th:field="*{username}" id="username" placeholder="username">
             <label for="username">Enter Username</label>
     <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</div>
@@ -54,16 +52,16 @@
                 <br>
                 <label for="password">Confirm password</label>
             </div>
-            <br>
-    </div>
     <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
-    <br/>
+    <br>
+    <div class="after_form_buttons">
         <div class="reg_on_reg_button">
     <input class="btn btn-warning" type="submit" id="submit" value="Sign up"/>
         </div>
         <div class="login_button">
             <a onclick href="/auth/login" class="btn btn-warning">Login</a>
         </div>
+    </div>
 </div>
 </form>
 </body>

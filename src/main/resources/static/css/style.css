@@ -9,8 +9,18 @@ header{
 
 }
 .container{
-    padding-left: 450px;
-    padding-top: 70px;
+    padding: 3%;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px silver;
+    box-shadow:5px 5px 5px #babbbc;
+    background-image: url("../img/filter_back15.png");
+    border-radius: 15px;
+    width: 25%;
+    margin-bottom: 5%;
+
 }
 btn btn-warning{
     position:relative;
@@ -21,8 +31,8 @@ btn btn-warning{
     font-weight: lighter;
 }
 .image{
-    padding-left: 850px;
-    padding-top: 40px;
+    padding: 7%;
+
 }
 
 .text1{
@@ -30,11 +40,7 @@ btn btn-warning{
     font-weight:lighter;
     color: #2c3034;
 }
-.login_button{
-    float: left;
-    width: 12%;
-}
-.reg_on_reg_button{
-    float: left;
-    width: 14%;
+.after_form_buttons{
+    display: flex;
+    justify-content: space-between;
 }
