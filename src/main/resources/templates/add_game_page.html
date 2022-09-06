@@ -26,17 +26,19 @@
 <br>
 <div class="addDeleteGameForm">
 <form th:method="POST" th:action="@{/new_game}" id="game" th:object="${game}">
-    <p>Добавить новую игру:</p>
+    <p style="font-weight: bold">Добавить новую игру:</p>
 
     <label for="name">Введите название игры</label>
     <input class="form-control" type="text" placeholder="Новая игра" name="name" th:field="*{gameName}" id="name">
     <div style="color: red" th:if="${#fields.hasErrors('gameName')}" th:errors="*{gameName}">game_name Error</div>
+
     <br>
     <input class="btn btn-warning" type="submit" value="Добавить" />
 </form>
+
 <br>
 <form th:method="POST" th:action="@{/delete_game}" id="dGame">
-    <p>Удалить игру:</p>
+    <p style="font-weight: bold">Удалить игру:</p>
     <label for="games">Выберите игру</label>
     <select class="form-select" aria-label="Default select example" id="games" name="games" multiple>
         <option th:each="game : ${games}" th:value="${game.getId}" th:text="${game.getGameName}" ></option>

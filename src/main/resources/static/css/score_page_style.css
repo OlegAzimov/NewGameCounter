@@ -1,10 +1,11 @@
 header{
-    padding: 10px;
+    padding: 1%;
     background: #fceabb;
     background: -moz-linear-gradient(left,  #fceabb 0%, #f8b500 83%, #fccd4d 97%, #fbdf93 100%);
     background: -webkit-linear-gradient(left,  #fceabb 0%,#f8b500 83%,#fccd4d 97%,#fbdf93 100%);
     background: linear-gradient(to left,  #fceabb 0%,#f8b500 83%,#fccd4d 100%,#fbdf93 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', endColorstr='#fbdf93',GradientType=1 );
+    height: 4%;
 
 
 }
@@ -21,8 +22,8 @@ header{
     font-weight: bold;
 }
 .place_images{
-    padding-left: 600px;
-    padding-top: 100px;
+
+
 }
 .text1{
     font-size:30px;
@@ -36,45 +37,63 @@ header{
     margin-right: 5vh;
     margin-left: 7vh;
 
-    margin-top: 10vh;
     display: inline-block;
     font-weight: bold;
 }
 .score_place{
     justify-content: center;
     display: inline-block;
+
 }
 .filter {
+    flex-direction: column;
     height: 100%;
-    width: auto;
+    width: fit-content;
     position: absolute;
     left: 0;
-    top: 67px;
     padding-top: 40px;
     background-image: url("../img/filter_back15.png");
     padding-left: 10px;
     padding-right: 10px;
     font-weight:normal;
     font-size: large;
+    margin: auto;
 
-    box-shadow:  #babbbc;
 
+}
+.header-box{
+display: flex;
+    width: 98%;
+    justify-content: space-between;
+}
+.logoutButton{
 
 }
 .header_message{
-    float: left;
-    width: 92%;
+
 
 }
+
 .place_images{
     float: left;
     width: 2%;
+    height: 100%;
+    margin-top: 15%;
 }
 .img_and_places{
+    display: flex;
     align-items: center;
     width: 60%;
-    margin-left: 30vh;
+    margin-left: auto;
 }
 .places{
     align-items: center;
+    height: 100%;
+    margin-top: 15%;
+}
+.filter_score{
+    display: flex;
+}
+.place_img{
+    padding-bottom: 50%;
 }

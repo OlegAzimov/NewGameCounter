@@ -44,23 +44,7 @@ header{
     justify-content: center;
     display: inline-block;
 }
-.filter {
-    height: 100%;
-    width: auto;
-    position: absolute;
-    left: 0;
-    top: 67px;
-    padding-top: 40px;
-    background-image: url("../img/filter_back15.png");
-    padding-left: 10px;
-    padding-right: 10px;
-    font-weight:normal;
-    font-size: large;
 
-    box-shadow:  #babbbc;
-
-
-}
 .header_message{
     float: left;
     width: 92%;
