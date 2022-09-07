@@ -40,6 +40,7 @@
         <img src="img/3_place.png" width="40px">
     </div>
 </div>
+    <div class="places_and_button">
 <div class="places">
     <div class="score_name">
     <p th:each="gameUserMap : ${gameUsersMapsList}" th:text="${gameUserMap.getKey}" ></p>
@@ -48,6 +49,11 @@
     <p th:each="gameUserMap : ${gameUsersMapsList}" th:text="${gameUserMap.getValue}" ></p>
     </div>
 </div>
+    <br>
+        <div class="add_game_button">
+    <a class="btn btn-warning" onclick href="/main_page">Добавить игру</a>
+</div>
+    </div>
 </div>
 <div class="filter" >
 <form style="color: black" th:method="POST" th:action="@{/filter}" id="gameList">
@@ -65,9 +71,7 @@
     <input class="btn btn-warning" type="submit" value="Фильтр" />
 </form>
 
-    <br>
-    <a class="btn btn-warning" onclick href="/main_page">Добавить игру</a>
-    <br>
+
     <br>
     <a class="btn btn-warning" onclick href="/add_game_page">Новая игра</a>
 </div>

@@ -14,16 +14,19 @@
 <body background="\img\back.png">
 
 <header>
+    <div class="header-box">
     <div class="header_message">
         <p class="text1">Game Counter</p>
     </div>
     <div class="home_button">
         <a class="btn btn-warning" onclick href="/score_page">Home</a>
     </div>
+    </div>
 
 </header>
 <br>
 <br>
+<div class="form">
 <div class="addDeleteGameForm">
 <form th:method="POST" th:action="@{/new_game}" id="game" th:object="${game}">
     <p style="font-weight: bold">Добавить новую игру:</p>
@@ -46,6 +49,7 @@
     <br>
     <input class="btn btn-warning" type="submit" value="Удалить" />
 </form>
+</div>
 </div>
 </body>
 </html>

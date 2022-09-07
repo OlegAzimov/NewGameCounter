@@ -50,24 +50,25 @@ header{
     width: 92%;
 
 }
-.place_images{
-    float: left;
-    width: 2%;
+.form{
+    display: flex;
+    flex-direction: column;
 }
-.img_and_places{
-    align-items: center;
-    width: 60%;
-    margin-left: 30vh;
-}
-.places{
-    align-items: center;
-}
+
 .addDeleteGameForm{
-    width: 40%;
-    margin-left: 30%;
+    border: 1px silver;
+    box-shadow:5px 5px 5px #babbbc;
+    background-image: url("../img/filter_back15.png");
+    border-radius: 15px;
+    width: fit-content;
+    padding: 5%;
+    margin-top: 2%;
+    align-self: center;
 
 }
-.header_message{
-    float: left;
-    width: 92%;
+
+.header-box{
+    display: flex;
+    width: 98%;
+    justify-content: space-between;
 }
