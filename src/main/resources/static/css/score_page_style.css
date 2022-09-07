@@ -50,7 +50,7 @@ header{
     background-image: url("../img/filter_back15.png");
     font-weight:normal;
     font-size: large;
-    padding: 40px 10px 40%;
+    padding: 40px 10px 30%;
 
 
 }
@@ -61,7 +61,8 @@ display: flex;
 }
 
 .add_game_button{
-    margin: 16%;
+    margin-left: 8%;
+    margin-right: 8%;
 }
 .place_images{
     float: left;
