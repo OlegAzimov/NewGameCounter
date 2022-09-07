@@ -105,5 +105,7 @@ display: flex;
     .score_name{
         margin-right: 2vh;
         margin-left: 3vh;
+        justify-content: left;
+        align-items: flex-start;
     }
 }
