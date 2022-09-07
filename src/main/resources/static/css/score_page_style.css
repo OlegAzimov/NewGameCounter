@@ -21,10 +21,7 @@ header{
     bottom:4px;
     font-weight: bold;
 }
-.place_images{
 
-
-}
 .text1{
     font-size:30px;
     font-weight:lighter;
@@ -64,13 +61,13 @@ display: flex;
 }
 
 .add_game_button{
-    margin: 12%;
+    margin: 16%;
 }
 .place_images{
     float: left;
     width: 2%;
     height: 100%;
-    margin-top: 15%;
+    margin-top: 13%;
 }
 .img_and_places{
     display: flex;
