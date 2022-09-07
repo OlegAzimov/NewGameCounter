@@ -120,6 +120,9 @@ display: flex;
     .img_and_places{
         display: block;
     }
+    .btn-warning{
+        margin-bottom: 2%;
+    }
 }
 
 
