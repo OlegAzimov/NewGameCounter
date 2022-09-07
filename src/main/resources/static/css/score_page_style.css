@@ -93,6 +93,11 @@ display: flex;
 .place_img{
     padding-bottom: 50%;
 }
+.places_and_button{
+    margin-top: 3.5%;
+    display: flex;
+    flex-direction: column;
+}
 @media screen and (max-width: 768px){
    .filter{
        position: relative;
@@ -109,10 +114,12 @@ display: flex;
         margin-right: 1vh;
         margin-left: 2vh;
     }
+    .places_and_button{
+        margin-top: auto;
+    }
+    .img_and_places{
+        display: block;
+    }
 }
-.places_and_button{
-    margin-top: 3.5%;
-    display: flex;
-    flex-direction: column;
-}
+
 
