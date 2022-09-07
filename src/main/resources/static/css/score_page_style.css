@@ -100,17 +100,11 @@ display: flex;
     .place_images{
         display: none;
     }
-}
-@media screen and (max-width: 384px){
-    .score_name{
-        margin-right: 2vh;
-        margin-left: 3vh;
-        justify-content: left;
-        align-items: flex-start;
-    }
     .places{
         align-items: flex-start;
         height: 100%;
         margin-top: 15%;
     }
 }
+
+
