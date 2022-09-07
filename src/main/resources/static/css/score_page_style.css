@@ -47,18 +47,13 @@ header{
 }
 .filter {
     flex-direction: column;
-    height: 100%;
     width: fit-content;
     position: absolute;
     left: 0;
-    padding-top: 40px;
     background-image: url("../img/filter_back15.png");
-    padding-left: 10px;
-    padding-right: 10px;
     font-weight:normal;
     font-size: large;
-
-
+    padding: 40px 10px 40%;
 
 
 }
@@ -68,7 +63,9 @@ display: flex;
     justify-content: space-between;
 }
 
-
+.add_game_button{
+    margin: 12%;
+}
 .place_images{
     float: left;
     width: 2%;
