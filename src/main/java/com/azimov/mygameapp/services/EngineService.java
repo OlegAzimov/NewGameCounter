@@ -72,7 +72,7 @@ public class EngineService {
         Pair<String, Integer> userAndHowManyGames = new Pair<>(gameUser.getUsername(), listOfScores.size()) {
             @Override
             public String toString() {
-                return gameUser.getUsername()+" - "+ listOfScores.size();
+                return gameUser.getUsername()+"  "+ "("+listOfScores.size()+")";
             }
         };
         Pair<Pair<String, Integer>, String> userScore = new Pair<>(userAndHowManyGames, dF.format(sumOfPlaces / listOfScores.size()));
@@ -104,7 +104,7 @@ public class EngineService {
         Pair<String, Integer> userAndHowManyOneGame = new Pair<>(gameUser.getUsername(), finalScore.size()) {
             @Override
             public String toString() {
-                return gameUser.getUsername()+" - "+ finalScore.size();
+                return gameUser.getUsername()+"  "+ "("+finalScore.size()+")";
             }
         };
 
