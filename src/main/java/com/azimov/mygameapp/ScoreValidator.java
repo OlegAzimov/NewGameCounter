@@ -10,6 +10,7 @@ import org.springframework.validation.Validator;
 @Component
 public class ScoreValidator implements Validator {
     private final EngineService engineService;
+
     @Autowired
     public ScoreValidator(EngineService engineService) {
         this.engineService = engineService;

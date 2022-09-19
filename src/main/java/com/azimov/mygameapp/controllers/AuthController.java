@@ -19,6 +19,7 @@ import javax.validation.Valid;
 public class AuthController {
     private final GameUserValidator gameUserValidator;
     private final RegistrationService registrationService;
+
     @Autowired
     public AuthController(GameUserValidator gameUserValidator, RegistrationService registrationService) {
         this.gameUserValidator = gameUserValidator;
@@ -26,22 +27,25 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public String loginPage(){
+    public String loginPage() {
         return "auth/login";
     }
+
     @GetMapping("/registration")
-    public String registrationPage(@ModelAttribute("gameUser")GameUser gameUser){
+    public String registrationPage(@ModelAttribute("gameUser") GameUser gameUser) {
         return "auth/registration";
     }
+
     @PostMapping("/registration")
     public String performRegistration(@ModelAttribute("gameUser") @Valid GameUser gameUser,
-                                      BindingResult bindingResult, Model model){
+                                      BindingResult bindingResult, Model model) {
         gameUserValidator.validate(gameUser, bindingResult);
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             System.out.println("BINDING RESULT ERROR");
             model.addAttribute("gameUser", gameUser);
-            return "auth/registration";}
+            return "auth/registration";
+        }
         registrationService.register(gameUser);
 
         return "redirect:/auth/login";

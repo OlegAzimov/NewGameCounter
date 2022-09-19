@@ -14,6 +14,7 @@ import java.util.Optional;
 @Service
 public class GameUserDetailsService implements UserDetailsService {
     private final GameUserRepository gameUserRepository;
+
     @Autowired
     public GameUserDetailsService(GameUserRepository gameUserRepository) {
         this.gameUserRepository = gameUserRepository;

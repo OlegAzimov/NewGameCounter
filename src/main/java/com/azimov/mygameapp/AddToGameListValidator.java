@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+
 @Component
 public class AddToGameListValidator implements Validator {
     private final EngineService engineService;
+
     @Autowired
     public AddToGameListValidator(EngineService engineService) {
         this.engineService = engineService;
@@ -22,9 +24,9 @@ public class AddToGameListValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         Game game = (Game) target;
-       if(engineService.findGameByGameName(game.getGameName()) != null){
+        if (engineService.findGameByGameName(game.getGameName()) != null) {
             errors.rejectValue("gameName", "", "Эта игра уже занесена в список");
         }
 
-   }
+    }
 }

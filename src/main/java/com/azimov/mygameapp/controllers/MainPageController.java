@@ -1,4 +1,5 @@
 package com.azimov.mygameapp.controllers;
+
 import com.azimov.mygameapp.PlayedGameValidator;
 import com.azimov.mygameapp.ScoreValidator;
 import com.azimov.mygameapp.models.Game;
@@ -51,7 +52,7 @@ public class MainPageController {
                                 Model model2, @ModelAttribute("game") Game game,
                                 @RequestParam("gameUserList") Set<GameUser> gameUsers,
                                 @RequestParam("place") List<Double> places
-                                ) {
+    ) {
         playedGameValidator.validate(playedGame, bindingResult);
         scoreValidator.validate(score, bindingResult1);
         model3.addAttribute("score", new Score());
@@ -66,7 +67,7 @@ public class MainPageController {
             engineService.savePlayedGame(playedGame);
             model1.addAttribute("gameUsers", engineService.findAllGameUsers());
             model2.addAttribute("games", engineService.findAllGames());
-            for (GameUser gameUser1 : gameUsers){
+            for (GameUser gameUser1 : gameUsers) {
                 Score score1 = new Score();
                 for (Double place : places) {
                     score1.setOwner(playedGame);
@@ -77,7 +78,6 @@ public class MainPageController {
                     break;
                 }
             }
-
 
 
             return "main_page";

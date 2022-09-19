@@ -24,6 +24,7 @@ public class EngineService {
     private final GamesRepository gamesRepository;
     private final PlayedGameRepository playedGameRepository;
     private final ScoreRepository scoreRepository;
+    private final DecimalFormat dF = new DecimalFormat("#.##");
 
 
     @Autowired
@@ -34,79 +35,105 @@ public class EngineService {
         this.scoreRepository = scoreRepository;
     }
 
-    public List<GameUser> findAllGameUsers(){
+    public List<GameUser> findAllGameUsers() {
         return gameUserRepository.findAll();
     }
-    public List<Game> findAllGames(){
+
+    public List<Game> findAllGames() {
         return gamesRepository.findAll();
     }
-    public List<PlayedGame> findAllPlayedGames(){return playedGameRepository.findAll();}
-    public List<Score> findAllScores(){return scoreRepository.findAll();}
-    public Optional <PlayedGame> findPlayedGame(Date date, Game game, int number){
+
+    public List<PlayedGame> findAllPlayedGames() {
+        return playedGameRepository.findAll();
+    }
+
+    public List<Score> findAllScores() {
+        return scoreRepository.findAll();
+    }
+
+    public Optional<PlayedGame> findPlayedGame(Date date, Game game, int number) {
         return playedGameRepository.findPlayedGame(date, game, number).stream().findAny();
     }
-    public List<PlayedGame> findPlayedGameByGameName(Game game){
+
+    public List<PlayedGame> findPlayedGameByGameName(Game game) {
         return playedGameRepository.findByGameName(game);
     }
-    public List<Score> findScoreByGameUser(GameUser gameUser){
+
+    public List<Score> findScoreByGameUser(GameUser gameUser) {
         return scoreRepository.findByGameUserScore(gameUser);
     }
-    public Pair<String, String> showGameUserScores(GameUser gameUser){
+
+    public Pair<Pair<String, Integer>, String> showGameUserScores(GameUser gameUser) {
         List<Score> listOfScores = scoreRepository.findByGameUserScore(gameUser);
         double sumOfPlaces = 0;
-        for (Score score : listOfScores){
+        for (Score score : listOfScores) {
             sumOfPlaces = sumOfPlaces + score.getPlace();
         }
-        DecimalFormat dF = new DecimalFormat("#.##");
-        Pair<String, String> userScore = new Pair<>(gameUser.getUsername(),  dF.format(sumOfPlaces/listOfScores.size()));
+        Pair<String, Integer> userAndHowManyGames = new Pair<>(gameUser.getUsername(), listOfScores.size()) {
+            @Override
+            public String toString() {
+                return gameUser.getUsername()+" - "+ listOfScores.size();
+            }
+        };
+        Pair<Pair<String, Integer>, String> userScore = new Pair<>(userAndHowManyGames, dF.format(sumOfPlaces / listOfScores.size()));
         return userScore;
     }
-    public List<Score> findScoreByPlayedGame(PlayedGame playedGame){
+
+    public List<Score> findScoreByPlayedGame(PlayedGame playedGame) {
         return scoreRepository.findByOwner(playedGame);
     }
-    public Pair<String, String> showGameUserScoresByPlayedGame(GameUser gameUser, List<Score> scores){
+
+    public Pair<Pair<String, Integer>, String> showGameUserScoresByPlayedGame(GameUser gameUser, List<Score> scores) {
 
         List<Score> finalScore = new ArrayList<>();
-        for (Score score : scores){
-            if(score.getGameUserScore().equals(gameUser)){
+        for (Score score : scores) {
+            if (score.getGameUserScore().equals(gameUser)) {
                 finalScore.add(score);
             }
 
         }
         double sumOfPlaces1 = 0;
-        for (Score score : finalScore){
+        for (Score score : finalScore) {
             sumOfPlaces1 = sumOfPlaces1 + score.getPlace();
         }
-        if(sumOfPlaces1 == 0){
+        if (sumOfPlaces1 == 0) {
             return null;
 
 
         }
-        DecimalFormat dF = new DecimalFormat("#.##");
+        Pair<String, Integer> userAndHowManyOneGame = new Pair<>(gameUser.getUsername(), finalScore.size()) {
+            @Override
+            public String toString() {
+                return gameUser.getUsername()+" - "+ finalScore.size();
+            }
+        };
 
-        Pair<String, String> userScore = new Pair<>(gameUser.getUsername(),  dF.format(sumOfPlaces1/finalScore.size()) );
-        return userScore;}
+        Pair<Pair<String, Integer>, String> userScore = new Pair<>(userAndHowManyOneGame, dF.format(sumOfPlaces1 / finalScore.size()));
+        return userScore;
+    }
 
-    public Game findGameByGameName(String name){
+    public Game findGameByGameName(String name) {
         return gamesRepository.findGameByGameName(name);
     }
 
 
-
-
+    @Transactional
+    public void deleteGameById(int id) {
+        gamesRepository.deleteById(id);
+    }
 
     @Transactional
-    public void deleteGameById(int id){gamesRepository.deleteById(id);}
-    @Transactional
-    public void savePlayedGame(PlayedGame playedGame){
+    public void savePlayedGame(PlayedGame playedGame) {
         playedGameRepository.save(playedGame);
     }
+
     @Transactional
-     public void saveScore(Score score){
+    public void saveScore(Score score) {
         scoreRepository.save(score);
-     }
+    }
+
     @Transactional
-     public void saveGame(Game game){
+    public void saveGame(Game game) {
         gamesRepository.save(game);
-     }
+    }
 }

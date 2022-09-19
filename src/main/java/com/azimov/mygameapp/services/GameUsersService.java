@@ -16,7 +16,7 @@ public class GameUsersService {
         this.userRepository = userRepository;
     }
 
-    public GameUser findUserByUsername(String username){
+    public GameUser findUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 }

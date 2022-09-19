@@ -5,6 +5,7 @@ import com.azimov.mygameapp.models.GameUser;
 import com.azimov.mygameapp.models.PlayedGame;
 import com.azimov.mygameapp.models.Score;
 import com.azimov.mygameapp.services.EngineService;
+import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,13 +33,13 @@ public class ScoreController {
                             Model model4) {
         model4.addAttribute("games", engineService.findAllGames());
         List<GameUser> gameUsers = engineService.findAllGameUsers();
-        Map<String, String> gameUsersMap = new HashMap<>();
+        Map<Pair<String, Integer>, String> gameUsersMap = new HashMap<>();
         for (GameUser gu : gameUsers) {
             gameUsersMap.put(engineService.showGameUserScores(gu).getKey(), engineService.showGameUserScores(gu).getValue());
 
         }
-        Map<String, String> finalMap = new HashMap<>(gameUsersMap);
-        List<Map.Entry<String, String>> entries = finalMap.entrySet()
+        Map<Pair<String, Integer>, String> finalMap = new HashMap<>(gameUsersMap);
+        List<Map.Entry<Pair<String, Integer>, String>> entries = finalMap.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue())
                 .toList();
@@ -55,7 +56,7 @@ public class ScoreController {
     public String showScoreByPlayedGames(@RequestParam(value = "gameList", required = false) List<Game> games,
                                          Model model,
                                          Model model1) {
-        if(games == null){
+        if (games == null) {
             return "redirect:/score_page";
         }
         model.addAttribute("games", engineService.findAllGames());
@@ -69,15 +70,15 @@ public class ScoreController {
 
         }
         List<GameUser> gameUsers = engineService.findAllGameUsers();
-        Map<String, String> gameUsersMap = new HashMap<>();
+        Map<Pair<String, Integer>, String> gameUsersMap = new HashMap<>();
         for (GameUser gu : gameUsers) {
             if (engineService.showGameUserScoresByPlayedGame(gu, scores) != null)
                 gameUsersMap.put(engineService.showGameUserScoresByPlayedGame(gu, scores).getKey(), (engineService.showGameUserScoresByPlayedGame(gu, scores).getValue()));
 
         }
-        Map<String, String> finalMap = new HashMap<>(gameUsersMap);
-        Map<String, String> sortedFinalMap = finalMap;
-        List<Map.Entry<String, String>> entries = sortedFinalMap.entrySet()
+        Map<Pair<String, Integer>, String> finalMap = new HashMap<>(gameUsersMap);
+        Map<Pair<String, Integer>, String> sortedFinalMap = finalMap;
+        List<Map.Entry<Pair<String, Integer>, String>> entries = sortedFinalMap.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue())
                 .toList();
