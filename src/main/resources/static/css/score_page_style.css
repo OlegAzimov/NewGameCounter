@@ -45,7 +45,7 @@ header{
 .filter {
     flex-direction: column;
     width: fit-content;
-    position: absolute;
+    /*position: absolute;*/
     left: 0;
     background-image: url("../img/filter_back15.png");
     font-weight:normal;
