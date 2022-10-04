@@ -51,22 +51,23 @@ public class MainPageController {
                                 Model model1, @ModelAttribute("gameUser") GameUser gameUser,
                                 Model model2, @ModelAttribute("game") Game game,
                                 @RequestParam("gameUserList") Set<GameUser> gameUsers,
-                                @RequestParam("place") List<Double> places
-    ) {
+                                @RequestParam("place") List<Double> places,
+                                Model model4, String message
+    ) {model1.addAttribute("gameUsers", engineService.findAllGameUsers());
         playedGameValidator.validate(playedGame, bindingResult);
         scoreValidator.validate(score, bindingResult1);
         model3.addAttribute("score", new Score());
+        model2.addAttribute("games", engineService.findAllGames());
+        model.addAttribute("playedGame", playedGame);
 
         if (bindingResult.hasErrors() || bindingResult1.hasErrors() || gameUsers.size() < places.size()) {
             System.out.println("BINDING RESULT ERROR");
-            model.addAttribute("playedGame", playedGame);
-            model1.addAttribute("gameUsers", engineService.findAllGameUsers());
-            model2.addAttribute("games", engineService.findAllGames());
+
             return "main_page";
         } else {
+            model4.addAttribute("success_message" ,message="Игра успешно добавлена");
             engineService.savePlayedGame(playedGame);
-            model1.addAttribute("gameUsers", engineService.findAllGameUsers());
-            model2.addAttribute("games", engineService.findAllGames());
+
             for (GameUser gameUser1 : gameUsers) {
                 Score score1 = new Score();
                 for (Double place : places) {

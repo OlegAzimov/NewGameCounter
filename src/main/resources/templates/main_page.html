@@ -28,7 +28,8 @@
 <div class="body1">
     <div class="main_form">
         <div class="only_form">
-    <form th:method="POST" th:action="@{/main_page/addPlayedGame}" th:object="${playedGame}" id="addPlayedGameAndScore">
+            <p th:text="${success_message}" style="font-weight: bold; color: green"></p>
+    <form th:method="POST" th:action="@{/main_page/addPlayedGame}" name="form" th:object="${playedGame}" id="addPlayedGameAndScore">
     <label for="game">Выберете игру</label>
     <select class="form-select" aria-label="Default select example" th:object="${playedGame}" th:field="*{gameName}" id="game" name="game">
         <option  th:each="game : ${games}" th:value="${game.getId()}" th:text="${game.getGameName()}"></option>
@@ -66,6 +67,7 @@
     <br>
         </div>
 <div class="addButton">
+
 <input class="btn btn-warning" type="submit" form="addPlayedGameAndScore" value="Добавить игру" />
 </div>
     <br>

@@ -1,5 +1,6 @@
 var countOfFields = 1;
 var maxFieldLimit = 12;
+var xhr = new XMLHttpRequest();
 function deleteField(a) {
     var contDiv = a.parentNode;
     if(countOfFields > 1){
