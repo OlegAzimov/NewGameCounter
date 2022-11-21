@@ -34,6 +34,7 @@ public class EngineService {
         this.playedGameRepository = playedGameRepository;
         this.scoreRepository = scoreRepository;
     }
+    //для railway
 
     public List<GameUser> findAllGameUsers() {
         return gameUserRepository.findAll();
