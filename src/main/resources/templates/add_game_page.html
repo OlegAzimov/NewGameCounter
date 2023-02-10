@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Game Redactor</title>
+    <title>Добавление игры</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -18,9 +18,12 @@
     <div>
         <p class="text1">Game Counter</p>
     </div>
-    <div class="home_button">
-        <a class="btn btn-warning" onclick href="/score_page">Home</a>
-    </div>
+        <div class="logoutButton">
+            <a class="btn btn-warning" onclick href="/score_page">Оргия</a>
+            <form th:action="@{/logout}" th:method="POST">
+                <input class="btn btn-warning" type="submit" value="Выход"/>
+            </form>
+        </div>
     </div>
 
 </header>
@@ -38,7 +41,7 @@
 </form>
 
 <br>
-<form th:method="POST" th:action="@{/delete_game}" id="dGame">
+<form th:if="${games != null}" th:method="POST" th:action="@{/delete_game}" id="dGame">
     <p style="font-weight: bold">Удалить игру:</p>
     <label for="games">Выберите игру</label>
     <select class="form-select" aria-label="Default select example" id="games" name="games" multiple>

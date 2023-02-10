@@ -77,8 +77,7 @@ public class ScoreController {
 
         }
         Map<Pair<String, Integer>, String> finalMap = new HashMap<>(gameUsersMap);
-        Map<Pair<String, Integer>, String> sortedFinalMap = finalMap;
-        List<Map.Entry<Pair<String, Integer>, String>> entries = sortedFinalMap.entrySet()
+        List<Map.Entry<Pair<String, Integer>, String>> entries = finalMap.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue())
                 .toList();

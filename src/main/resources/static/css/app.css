@@ -25,7 +25,12 @@ header {
     font-weight: lighter;
     color: #2c3034;
 }
-
+.logoutButton {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
 .mainCard {
     align-self: center;
     border: 1px silver;

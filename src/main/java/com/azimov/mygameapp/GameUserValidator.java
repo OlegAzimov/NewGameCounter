@@ -24,11 +24,11 @@ public class GameUserValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         GameUser gameUser = (GameUser) target;
-        if (gameUsersService.findUserByUsername(gameUser.getUsername()) != null) {
-
-            errors.rejectValue("username", "", "Пользователь с таким именем уже существует");
-
-
+        if (gameUsersService.findUserByUsername(gameUser.getUsername()).isPresent()) {
+            errors.rejectValue("username", "", "Пользователь с таким логином уже существует");
+        }
+        if (gameUsersService.findUserByName(gameUser.getName()).isPresent()) {
+            errors.rejectValue("name", "", "Данное имя уже занято");
         }
     }
 }

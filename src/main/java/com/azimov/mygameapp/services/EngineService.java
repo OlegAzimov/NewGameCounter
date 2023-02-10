@@ -70,14 +70,13 @@ public class EngineService {
         for (Score score : listOfScores) {
             sumOfPlaces = sumOfPlaces + score.getPlace();
         }
-        Pair<String, Integer> userAndHowManyGames = new Pair<>(gameUser.getUsername(), listOfScores.size()) {
+        Pair<String, Integer> userAndHowManyGames = new Pair<>(gameUser.getName(), listOfScores.size()) {
             @Override
             public String toString() {
-                return gameUser.getUsername()+"  "+ "("+listOfScores.size()+")";
+                return gameUser.getName()+"  "+ "("+listOfScores.size()+")";
             }
         };
-        Pair<Pair<String, Integer>, String> userScore = new Pair<>(userAndHowManyGames, dF.format(sumOfPlaces / listOfScores.size()));
-        return userScore;
+        return new Pair<>(userAndHowManyGames, dF.format(sumOfPlaces / listOfScores.size()));
     }
 
     public List<Score> findScoreByPlayedGame(PlayedGame playedGame) {
@@ -102,15 +101,14 @@ public class EngineService {
 
 
         }
-        Pair<String, Integer> userAndHowManyOneGame = new Pair<>(gameUser.getUsername(), finalScore.size()) {
+        Pair<String, Integer> userAndHowManyOneGame = new Pair<>(gameUser.getName(), finalScore.size()) {
             @Override
             public String toString() {
-                return gameUser.getUsername()+"  "+ "("+finalScore.size()+")";
+                return gameUser.getName()+"  "+ "("+finalScore.size()+")";
             }
         };
 
-        Pair<Pair<String, Integer>, String> userScore = new Pair<>(userAndHowManyOneGame, dF.format(sumOfPlaces1 / finalScore.size()));
-        return userScore;
+        return new Pair<>(userAndHowManyOneGame, dF.format(sumOfPlaces1 / finalScore.size()));
     }
 
     public Game findGameByGameName(String name) {
