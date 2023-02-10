@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-game-user-table
+      author: El Sklonny
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: game_user
+      changes:
+        - createTable:
+            tableName: game_user
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar
+                  constraints:
+                    nullable: false

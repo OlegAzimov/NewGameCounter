@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-role-name-columns-in-table-game-user
+      author: El Sklonny
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            - columnExists:
+                columnName: role, name
+                tableName: game_user
+      changes:
+        - addColumn:
+            tableName: game_user
+            columns:
+              - column:
+                  name: role
+                  type: varchar(25)
+                  defaultValue: USER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  defaultValue: cucumber
+                  constraints:
+                    nullable: false
+        - sql:
+            sql: UPDATE game_user set role = 'ADMIN' WHERE username = 'Oleg'
+        - sql:
+            sql: UPDATE game_user set name = username

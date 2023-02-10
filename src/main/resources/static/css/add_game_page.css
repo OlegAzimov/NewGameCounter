@@ -1,0 +1,27 @@
+
+.place_images{
+    padding-left: 600px;
+    padding-top: 100px;
+}
+.score_name{
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    margin-right: 5vh;
+    margin-left: 7vh;
+
+    margin-top: 10vh;
+    display: inline-block;
+    font-weight: bold;
+}
+.score_place{
+    justify-content: center;
+    display: inline-block;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+}
+
+

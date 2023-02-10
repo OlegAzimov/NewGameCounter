@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-game-table
+      author: El Sklonny
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: games
+      changes:
+        - createTable:
+            tableName: games
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: game_name
+                  type: varchar
+                  constraints:
+                    nullable: false

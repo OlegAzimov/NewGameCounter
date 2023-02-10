@@ -1,18 +1,5 @@
-header{
-    padding: 1%;
-    background: #fceabb;
-    background: -moz-linear-gradient(left,  #fceabb 0%, #f8b500 83%, #fccd4d 97%, #fbdf93 100%);
-    background: -webkit-linear-gradient(left,  #fceabb 0%,#f8b500 83%,#fccd4d 97%,#fbdf93 100%);
-    background: linear-gradient(to left,  #fceabb 0%,#f8b500 83%,#fccd4d 100%,#fbdf93 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', endColorstr='#fbdf93',GradientType=1 );
-    height: 4%;
 
 
-}
-.container{
-    padding-left: 450px;
-    padding-top: 70px;
-}
 .btn btn-warning{
 
     right:5px;
@@ -22,11 +9,6 @@ header{
     font-weight: bold;
 }
 
-.text1{
-    font-size:30px;
-    font-weight:lighter;
-    color: #2c3034;
-}
 .score_name{
     justify-content: center;
     align-items: center;
@@ -46,21 +28,21 @@ header{
     flex-direction: column;
     width: fit-content;
     position: absolute;
-    left: 0;
+    height: 100%;
     background-image: url("../img/filter_back15.png");
-    font-weight:normal;
     font-size: large;
     padding: 40px 10px 30%;
 
 
 
 }
-.header-box{
-display: flex;
-    width: 98%;
-    justify-content: space-between;
-}
 
+.logoutButton {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
 .add_game_button{
     margin-left: 8%;
     margin-right: 8%;
@@ -115,9 +97,6 @@ display: flex;
     }
     .img_and_places{
         display: block;
-    }
-    .btn-warning{
-        margin-bottom: 2%;
     }
 }
 
