@@ -10,7 +10,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "played_game", uniqueConstraints = {@UniqueConstraint(columnNames = {"game_name_id", "date", "number"})})
-
 public class PlayedGame {
     @Id
     @Column(name = "id")

@@ -10,6 +10,16 @@
     <link rel="shortcut icon" href="\img\dice.ico" type="image/x-icon">
     <link href="\css\profile_page.css" rel="stylesheet">
     <link href="\css\app.css" rel="stylesheet">
+
+    <script>function checkName() {
+        let name = document.getElementById("name").value
+        if(name !== document.getElementById("name").getAttribute("value")){
+            document.getElementById("updateGameUserName").submit();
+        }
+    }
+
+
+    </script>
 </head>
 <body background="\img\back.png">
 <header>
@@ -30,14 +40,14 @@
         <div class="image">
             <img src="\img\dice2.png" width="150px">
         </div>
-        <form th:method="POST" th:action="@{/profile}" name="form" th:object="${user}" id="updateGameUserName">
+        <form class="name-form" th:method="POST" th:action="@{/profile}" name="form" th:object="${user}" id="updateGameUserName">
             <label for="name">Ваше имя</label>
             <input class="form-control" style="border: none; border-radius: 5px; margin-top: 3px"
                    th:field="*{name}" id="name" placeholder="Имя"/>
-            <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error
+            <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
         </form>
         <div class="updateButton">
-            <input class="btn btn-warning" type="submit" form="updateGameUserName" value="Сохранить"/>
+            <input class="btn btn-warning" type="submit" onclick="checkName()" value="Сохранить"/>
         </div>
     </div>
 </div>

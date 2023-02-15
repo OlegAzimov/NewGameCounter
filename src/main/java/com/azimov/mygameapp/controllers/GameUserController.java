@@ -33,7 +33,7 @@ public class GameUserController {
         gameUserValidator.validate(gameUser, bindingResult);
 
         if (bindingResult.hasFieldErrors("name")) {
-            System.out.println("NOT UNIQUE NAME");
+            System.out.println("GameUserController: NOT UNIQUE NAME ERROR METHOD: POST URL: /profile");
             model.addAttribute("gameUser", gameUser);
             return "profile_page";
         }

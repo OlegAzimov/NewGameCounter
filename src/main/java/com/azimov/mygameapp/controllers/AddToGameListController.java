@@ -51,7 +51,8 @@ public class AddToGameListController {
             if (Objects.equals(gameUser.getRole(), "ADMIN")) {
                 model2.addAttribute("games", engineService.findAllGames());
             }
-            System.out.println("BINDING RESULT ERROR");
+            System.out.println("AddToGameListController: GAME VALIDATE ERROR METHOD: POST URL: /new_game");
+
             return "add_game_page";
         }
 

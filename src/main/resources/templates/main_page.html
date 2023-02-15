@@ -10,7 +10,11 @@
     <link href="\css\main_page.css" rel="stylesheet">
     <link href="\css\app.css" rel="stylesheet">
 
-
+<script>
+    {
+        var number = 2;
+    }
+</script>
 </head>
 <body background="\img\back.png">
 
@@ -37,7 +41,7 @@
     </select>
     <br>
     <label for="date">Выберите дату игры </label>
-    <input class="form-control" type="date" id="date" th:field="*{date}" />
+    <input class="form-control" type="date" id="date" th:field="*{date}"  />
     <div style="color: red" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">date Error</div>
     <br>
     <label for="number">Введите номер игры по счету</label>
@@ -47,22 +51,23 @@
     </select>
     <label for="place">Выберите игроков и их места</label>
     <select class="form-select" aria-label="Default select example"   name="gameUserList" >
-        <option th:each="gameUser : ${gameUsers}"  th:value="${gameUser.getId}" th:text="${gameUser.getName()}" th:placeholder="Игрок">
+        <option th:each="gameUser : ${gameUsers}"  th:value="${gameUser.getId}" th:text="${gameUser.getName}" th:placeholder="Игрок">
         </option>
         <input class="form-control" style="border: none; border-radius: 5px; margin-top: 3px" type="number" name="place" placeholder="Место" value="1"/>
         <br>
     </select>
-        <div>
+        <div id="2">
             <a class="closeModal" onclick="return deleteField(this)" href="#"></a>
             <br>
     <select class="form-select" aria-label="Default select example" id="place" name="gameUserList">
-        <option th:each="gameUser : ${gameUsers}"  th:value="${gameUser.getId}" th:text="${gameUser.getName()}"></option>
+        <option th:each="gameUser : ${gameUsers}"  th:value="${gameUser.getId}" th:text="${gameUser.getName}"></option>
         <input class="form-control" style="border: none; border-radius: 5px; margin-top: 3px" type="number" name="place" placeholder="Место" value="2"/>
     </select>
     <br>
     </div>
-</form>
-    <a id="add" class="btn btn-warning" onclick="addField()" href="#add">Добавить игрока</a>
+        <div style="color: red; padding-bottom: 10px;" th:if="${user_error_message}" th:text="${user_error_message}">user Error</div>
+    </form>
+    <a id="add" class="btn btn-warning" onclick="addField(number)" href="#add">Добавить игрока</a>
     <br>
     <br>
     <br>
