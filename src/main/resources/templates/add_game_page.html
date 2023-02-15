@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>Добавление игры</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="shortcut icon" href="\img\dice.ico" type="image/x-icon">
     <link href="\css\add_game_page.css" rel="stylesheet">
@@ -15,9 +16,9 @@
 
 <header>
     <div class="header-box">
-    <div>
-        <p class="text1">Game Counter</p>
-    </div>
+        <div>
+            <p class="text1">Game Counter</p>
+        </div>
         <div class="logoutButton">
             <a class="btn btn-warning" onclick href="/score_page">Оргия</a>
             <form th:action="@{/logout}" th:method="POST">
@@ -28,29 +29,28 @@
 
 </header>
 <div class="form">
-<div class="mainCard">
-<form th:method="POST" th:action="@{/new_game}" id="game" th:object="${game}">
-    <p style="font-weight: bold">Добавить новую игру:</p>
+    <div class="mainCard">
+        <form th:method="POST" th:action="@{/new_game}" id="game" th:object="${game}">
+            <p class="p-game">Добавление новой игры</p>
 
-    <label for="name">Введите название игры</label>
-    <input class="form-control" type="text" placeholder="Новая игра" name="name" th:field="*{gameName}" id="name">
-    <div style="color: red" th:if="${#fields.hasErrors('gameName')}" th:errors="*{gameName}">game_name Error</div>
+            <label for="name">Введите название игры:</label>
+            <input class="form-control input-game" type="text" placeholder="Новая игра" name="name"
+                   th:field="*{gameName}" id="name">
+            <div style="color: red" th:if="${#fields.hasErrors('gameName')}" th:errors="*{gameName}">game_name Error
+            </div>
+            <input class="btn btn-warning" type="submit" value="Добавить"/>
+        </form>
 
-    <br>
-    <input class="btn btn-warning" type="submit" value="Добавить" />
-</form>
-
-<br>
-<form th:if="${games != null}" th:method="POST" th:action="@{/delete_game}" id="dGame">
-    <p style="font-weight: bold">Удалить игру:</p>
-    <label for="games">Выберите игру</label>
-    <select class="form-select" aria-label="Default select example" id="games" name="games" multiple>
-        <option th:each="game : ${games}" th:value="${game.getId}" th:text="${game.getGameName}" ></option>
-    </select>
-    <br>
-    <input class="btn btn-warning" type="submit" value="Удалить" />
-</form>
-</div>
+        <br>
+        <form th:if="${games != null}" th:method="POST" th:action="@{/delete_game}" id="dGame">
+            <p class="p-game">Удаление игры</p>
+            <label for="games">Выберите игру:</label>
+            <select class="form-select input-game" aria-label="Default select example" id="games" name="games" multiple>
+                <option th:each="game : ${games}" th:value="${game.getId}" th:text="${game.getGameName}"></option>
+            </select>
+            <input class="btn btn-warning" type="submit" value="Удалить"/>
+        </form>
+    </div>
 </div>
 </body>
 </html>

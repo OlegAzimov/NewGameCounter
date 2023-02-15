@@ -18,7 +18,15 @@
     justify-content: center;
     display: inline-block;
 }
-
+.input-game {
+    margin: 10px 0;
+}
+.p-game {
+    font-size: 17px;
+    display: flex;
+    font-weight: bold;
+    justify-content: center;
+}
 .form{
     display: flex;
     flex-direction: column;

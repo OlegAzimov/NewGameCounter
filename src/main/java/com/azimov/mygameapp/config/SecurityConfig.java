@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -31,10 +32,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/auth/login")
                 .loginProcessingUrl("/process_login")
                 .defaultSuccessUrl("/score_page", true)
-                .failureUrl("/auth/login?error")
+                .failureUrl("/auth/login?error").permitAll()
                 .and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/auth/login");
-
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/auth/login")
+                .and()
+                .csrf().disable();
     }
 
     @Override

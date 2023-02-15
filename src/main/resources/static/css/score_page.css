@@ -36,7 +36,17 @@
 
 
 }
-
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+}
+.all-nothing-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 7px;
+}
 .add_game_button{
     margin-left: 8%;
     margin-right: 8%;
