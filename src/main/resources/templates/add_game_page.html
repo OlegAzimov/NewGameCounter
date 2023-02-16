@@ -10,7 +10,34 @@
     <link rel="shortcut icon" href="\img\dice.ico" type="image/x-icon">
     <link href="\css\add_game_page.css" rel="stylesheet">
     <link href="\css\app.css" rel="stylesheet">
+    <script>
 
+        function deleteButton() {
+            document.getElementById("dGame").submit()
+        }
+
+        function cancelButton() {
+            document.getElementById("deleteModal").style.display = "none";
+        }
+
+        function openDeletePopup() {
+            let select = document.getElementById("games");
+            let selected = select.options[select.selectedIndex]
+            if (selected) {
+                document.getElementById("deleteModal").style.display = "flex";
+            }
+        }
+
+        function closeDeletePopup() {
+            document.getElementById("deleteModal").style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target === document.getElementById("deleteModal")) {
+                document.getElementById("deleteModal").style.display = "none";
+            }
+        }
+    </script>
 </head>
 <body background="\img\back.png">
 
@@ -48,8 +75,18 @@
             <select class="form-select input-game" aria-label="Default select example" id="games" name="games" multiple>
                 <option th:each="game : ${games}" th:value="${game.getId}" th:text="${game.getGameName}"></option>
             </select>
-            <input class="btn btn-warning" type="submit" value="Удалить"/>
         </form>
+        <input class="btn btn-warning" type="submit" onclick="openDeletePopup()" value="Удалить"/>
+    </div>
+</div>
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <span onclick="closeDeletePopup()" class="close">&times;</span>
+        <p class="delete-text">Вы уверены, что хотите удалить игру?</p>
+        <div class="ok-not-buttons">
+            <input class="btn btn-warning" type="submit" onclick="cancelButton()" value="Отмена"/>
+            <input class="btn btn-warning delete" type="submit" onclick="deleteButton()" value="Удалить"/>
+        </div>
     </div>
 </div>
 </body>

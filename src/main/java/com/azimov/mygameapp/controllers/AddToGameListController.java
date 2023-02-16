@@ -65,8 +65,13 @@ public class AddToGameListController {
 
     @PostMapping("/delete_game")
     public String deleteGame(@RequestParam(value = "games", required = false) List<Integer> ids) {
-        for (int id : ids) {
-            engineService.deleteGameById(id);
+        if(ids == null){
+            System.out.println("AddToGameListController: GAME VALIDATE ERROR list is empty METHOD: POST URL: /delete_game");
+        }
+        else {
+            for (int id : ids) {
+                engineService.deleteGameById(id);
+            }
         }
         return "redirect:/add_game_page";
     }
