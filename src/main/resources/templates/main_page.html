@@ -2,14 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Game</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игра</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="shortcut icon" href="\img\dice.ico" type="image/x-icon">
-    <link href="\css\main_page_style.css" rel="stylesheet">
+    <link href="\css\main_page.css" rel="stylesheet">
+    <link href="\css\app.css" rel="stylesheet">
 
-
+<script>
+    {
+        var number = 2;
+    }
+</script>
 </head>
 <body background="\img\back.png">
 
@@ -18,16 +23,16 @@
     <div class="header_message">
     <p class="text1">Game Counter</p>
         </div>
-    <div class="home_button">
-        <a class="btn btn-warning" onclick href="/score_page">Home</a>
-    </div>
+        <div class="logoutButton">
+            <a class="btn btn-warning" onclick href="/score_page">Оргия</a>
+            <form th:action="@{/logout}" th:method="POST">
+                <input class="btn btn-warning" type="submit" value="Выход"/>
+            </form>
+        </div>
         </div>
 </header>
-<br>
-<br>
 <div class="body1">
-    <div class="main_form">
-        <div class="only_form">
+    <div class="mainCard">
             <p th:text="${success_message}" style="font-weight: bold; color: green"></p>
     <form th:method="POST" th:action="@{/main_page/addPlayedGame}" name="form" th:object="${playedGame}" id="addPlayedGameAndScore">
     <label for="game">Выберете игру</label>
@@ -36,36 +41,36 @@
     </select>
     <br>
     <label for="date">Выберите дату игры </label>
-    <input class="form-control" type="date" id="date" th:field="*{date}" />
+    <input class="form-control" type="date" id="date" th:field="*{date}"  />
     <div style="color: red" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">date Error</div>
     <br>
     <label for="number">Введите номер игры по счету</label>
-    <input class="form-control" type="text" id="number" th:field="*{number}"  min="1"/>
+    <input class="form-control" type="text" id="number" th:field="*{number}" />
     <div style="color: red" th:if="${#fields.hasErrors('number')}" th:errors="*{number}">number Error</div>
     <br>
     </select>
     <label for="place">Выберите игроков и их места</label>
     <select class="form-select" aria-label="Default select example"   name="gameUserList" >
-        <option th:each="gameUser : ${gameUsers}"  th:value="${gameUser.getId}" th:text="${gameUser.getUsername}" th:placeholder="Игрок">
+        <option th:each="gameUser : ${gameUsers}"  th:value="${gameUser.getId}" th:text="${gameUser.getName}" th:placeholder="Игрок">
         </option>
-        <input class="form-control" style="border: none; border-radius: 5px; margin-top: 3px" type="number" name="place" placeholder="Место" min="1"/>
+        <input class="form-control" style="border: none; border-radius: 5px; margin-top: 3px" type="number" name="place" placeholder="Место" value="1"/>
         <br>
     </select>
-        <div>
+        <div id="2">
             <a class="closeModal" onclick="return deleteField(this)" href="#"></a>
             <br>
     <select class="form-select" aria-label="Default select example" id="place" name="gameUserList">
-        <option th:each="gameUser : ${gameUsers}"  th:value="${gameUser.getId}" th:text="${gameUser.getUsername}"></option>
-        <input class="form-control" style="border: none; border-radius: 5px; margin-top: 3px" type="number" name="place" placeholder="Место" min="1"/>
+        <option th:each="gameUser : ${gameUsers}"  th:value="${gameUser.getId}" th:text="${gameUser.getName}"></option>
+        <input class="form-control" style="border: none; border-radius: 5px; margin-top: 3px" type="number" name="place" placeholder="Место" value="2"/>
     </select>
     <br>
     </div>
-</form>
-    <a id="add" class="btn btn-warning" onclick="addField()" href="#add">Добавить игрока</a>
+        <div style="color: red; padding-bottom: 10px;" th:if="${user_error_message}" th:text="${user_error_message}">user Error</div>
+    </form>
+    <a id="add" class="btn btn-warning" onclick="addField(number)" href="#add">Добавить игрока</a>
     <br>
     <br>
     <br>
-        </div>
 <div class="addButton">
 
 <input class="btn btn-warning" type="submit" form="addPlayedGameAndScore" value="Добавить игру" />

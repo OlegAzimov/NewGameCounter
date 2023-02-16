@@ -41,4 +41,13 @@ public class Game {
 
     public Game() {
     }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "id=" + id +
+                ", playedGames=" + playedGames +
+                ", gameName='" + gameName + '\'' +
+                '}';
+    }
 }

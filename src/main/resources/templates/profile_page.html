@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="shortcut icon" href="\img\dice.ico" type="image/x-icon">
+    <link href="\css\profile_page.css" rel="stylesheet">
+    <link href="\css\app.css" rel="stylesheet">
+
+    <script>function checkName() {
+        let name = document.getElementById("name").value
+        if(name !== document.getElementById("name").getAttribute("value")){
+            document.getElementById("updateGameUserName").submit();
+        }
+    }
+
+
+    </script>
+</head>
+<body background="\img\back.png">
+<header>
+    <div class="header-box">
+        <div>
+            <p class="text1">Game Counter</p>
+        </div>
+        <div class="logoutButton">
+            <a class="btn btn-warning" onclick href="/score_page">Оргия</a>
+            <form th:action="@{/logout}" th:method="POST">
+                <input class="btn btn-warning" type="submit" value="Выход"/>
+            </form>
+        </div>
+    </div>
+</header>
+<div class="body">
+    <div class="mainCard">
+        <div class="image">
+            <img src="\img\dice2.png" width="150px">
+        </div>
+        <form class="name-form" th:method="POST" th:action="@{/profile}" name="form" th:object="${user}" id="updateGameUserName">
+            <label for="name">Ваше имя</label>
+            <input class="form-control" style="border: none; border-radius: 5px; margin-top: 3px"
+                   th:field="*{name}" id="name" placeholder="Имя"/>
+            <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+        </form>
+        <div class="updateButton">
+            <input class="btn btn-warning" type="submit" onclick="checkName()" value="Сохранить"/>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

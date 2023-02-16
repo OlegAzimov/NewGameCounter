@@ -42,7 +42,7 @@ public class AuthController {
         gameUserValidator.validate(gameUser, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            System.out.println("BINDING RESULT ERROR");
+            System.out.println("AuthController: NOT UNIQUE ERROR METHOD: POST URL: /registration");
             model.addAttribute("gameUser", gameUser);
             return "auth/registration";
         }

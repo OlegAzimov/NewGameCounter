@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-played-game-table-constraint
+      author: El Sklonny
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - indexExists:
+                indexName: played_game_table_constraint
+      changes:
+        - addUniqueConstraint:
+            constraintName: played_game_table_constraint
+            columnNames: game_name_id, date, number
+            tableName: played_game

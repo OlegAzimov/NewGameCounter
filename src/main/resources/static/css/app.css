@@ -1,0 +1,44 @@
+header {
+    padding: 1%;
+    background: linear-gradient(to left, #fceabb 0%, #f8b500 83%, #fccd4d 100%, #fbdf93 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fceabb', endColorstr='#fbdf93', GradientType=1);
+    height: 4%;
+}
+.image{
+    padding: 7%;
+}
+.container{
+    padding-left: 450px;
+    padding-top: 70px;
+}
+.header-box {
+    display: flex;
+    width: 98%;
+    justify-content: space-between;
+}
+.home_button {
+    display: flex;
+    align-items: center;
+}
+.text1 {
+    font-size: 30px;
+    font-weight: lighter;
+    color: #2c3034;
+}
+.logoutButton {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+.mainCard {
+    align-self: center;
+    border: 1px silver;
+    box-shadow: 5px 5px 5px #babbbc;
+    background-image: url("../img/filter_back15.png");
+    border-radius: 15px;
+    width: 25rem;
+    padding: 5%;
+    margin-top: 5%;
+    margin-bottom: 2%;
+}

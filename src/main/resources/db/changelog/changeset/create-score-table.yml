@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-score-table
+      author: El Sklonny
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: score
+      changes:
+        - createTable:
+            tableName: score
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: place
+                  type: double
+                  constraints:
+                    nullable: false
+              - column:
+                  name: played_game_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_score_played_game
+                    references: played_game(id)
+                    nullable: false
+              - column:
+                  name: game_user_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_score_game_user
+                    references: game_user(id)
+                    nullable: false

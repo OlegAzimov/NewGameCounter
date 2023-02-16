@@ -2,54 +2,92 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Game Redactor</title>
+    <title>Добавление игры</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="shortcut icon" href="\img\dice.ico" type="image/x-icon">
-    <link href="\css\addGame_style.css" rel="stylesheet">
+    <link href="\css\add_game_page.css" rel="stylesheet">
+    <link href="\css\app.css" rel="stylesheet">
+    <script>
 
+        function deleteButton() {
+            document.getElementById("dGame").submit()
+        }
 
+        function cancelButton() {
+            document.getElementById("deleteModal").style.display = "none";
+        }
+
+        function openDeletePopup() {
+            let select = document.getElementById("games");
+            let selected = select.options[select.selectedIndex]
+            if (selected) {
+                document.getElementById("deleteModal").style.display = "flex";
+            }
+        }
+
+        function closeDeletePopup() {
+            document.getElementById("deleteModal").style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target === document.getElementById("deleteModal")) {
+                document.getElementById("deleteModal").style.display = "none";
+            }
+        }
+    </script>
 </head>
 <body background="\img\back.png">
 
 <header>
     <div class="header-box">
-    <div class="header_message">
-        <p class="text1">Game Counter</p>
-    </div>
-    <div class="home_button">
-        <a class="btn btn-warning" onclick href="/score_page">Home</a>
-    </div>
+        <div>
+            <p class="text1">Game Counter</p>
+        </div>
+        <div class="logoutButton">
+            <a class="btn btn-warning" onclick href="/score_page">Оргия</a>
+            <form th:action="@{/logout}" th:method="POST">
+                <input class="btn btn-warning" type="submit" value="Выход"/>
+            </form>
+        </div>
     </div>
 
 </header>
-<br>
-<br>
 <div class="form">
-<div class="addDeleteGameForm">
-<form th:method="POST" th:action="@{/new_game}" id="game" th:object="${game}">
-    <p style="font-weight: bold">Добавить новую игру:</p>
+    <div class="mainCard">
+        <form th:method="POST" th:action="@{/new_game}" id="game" th:object="${game}">
+            <p class="p-game">Добавление новой игры</p>
 
-    <label for="name">Введите название игры</label>
-    <input class="form-control" type="text" placeholder="Новая игра" name="name" th:field="*{gameName}" id="name">
-    <div style="color: red" th:if="${#fields.hasErrors('gameName')}" th:errors="*{gameName}">game_name Error</div>
+            <label for="name">Введите название игры:</label>
+            <input class="form-control input-game" type="text" placeholder="Новая игра" name="name"
+                   th:field="*{gameName}" id="name">
+            <div style="color: red" th:if="${#fields.hasErrors('gameName')}" th:errors="*{gameName}">game_name Error
+            </div>
+            <input class="btn btn-warning" type="submit" value="Добавить"/>
+        </form>
 
-    <br>
-    <input class="btn btn-warning" type="submit" value="Добавить" />
-</form>
-
-<br>
-<form th:method="POST" th:action="@{/delete_game}" id="dGame">
-    <p style="font-weight: bold">Удалить игру:</p>
-    <label for="games">Выберите игру</label>
-    <select class="form-select" aria-label="Default select example" id="games" name="games" multiple>
-        <option th:each="game : ${games}" th:value="${game.getId}" th:text="${game.getGameName}" ></option>
-    </select>
-    <br>
-    <input class="btn btn-warning" type="submit" value="Удалить" />
-</form>
+        <br>
+        <form th:if="${games != null}" th:method="POST" th:action="@{/delete_game}" id="dGame">
+            <p class="p-game">Удаление игры</p>
+            <label for="games">Выберите игру:</label>
+            <select class="form-select input-game" aria-label="Default select example" id="games" name="games" multiple>
+                <option th:each="game : ${games}" th:value="${game.getId}" th:text="${game.getGameName}"></option>
+            </select>
+        </form>
+        <input class="btn btn-warning" type="submit" onclick="openDeletePopup()" value="Удалить"/>
+    </div>
 </div>
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <span onclick="closeDeletePopup()" class="close">&times;</span>
+        <p class="delete-text">Вы уверены, что хотите удалить игру?</p>
+        <div class="ok-not-buttons">
+            <input class="btn btn-warning" type="submit" onclick="cancelButton()" value="Отмена"/>
+            <input class="btn btn-warning delete" type="submit" onclick="deleteButton()" value="Удалить"/>
+        </div>
+    </div>
 </div>
 </body>
 </html>

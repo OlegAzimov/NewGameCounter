@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -22,13 +23,11 @@ import java.util.Set;
 public class MainPageController {
     private final PlayedGameValidator playedGameValidator;
     private final EngineService engineService;
-    private final ScoreValidator scoreValidator;
 
     @Autowired
-    public MainPageController(PlayedGameValidator playedGameValidator, EngineService engineService, ScoreValidator scoreValidator) {
+    public MainPageController(PlayedGameValidator playedGameValidator, EngineService engineService) {
         this.playedGameValidator = playedGameValidator;
         this.engineService = engineService;
-        this.scoreValidator = scoreValidator;
     }
 
 
@@ -39,7 +38,10 @@ public class MainPageController {
 
         model.addAttribute("gameUsers", engineService.findAllGameUsers());
         model2.addAttribute("games", engineService.findAllGames());
-        model3.addAttribute("playedGame", new PlayedGame());
+        PlayedGame playedGame = new PlayedGame();
+        playedGame.setNumber(1);
+        playedGame.setDate(java.sql.Date.valueOf(LocalDate.now()));
+        model3.addAttribute("playedGame", playedGame);
         return ("main_page");
 
     }
@@ -47,25 +49,29 @@ public class MainPageController {
 
     @PostMapping("/addPlayedGame")
     public String addPlayedGame(@ModelAttribute("playedGame") @Valid PlayedGame playedGame, BindingResult bindingResult, Model model,
-                                @ModelAttribute("score") @Valid Score score, BindingResult bindingResult1, Model model3,
+                                @ModelAttribute("score") @Valid Score score, Model model3,
                                 Model model1, @ModelAttribute("gameUser") GameUser gameUser,
                                 Model model2, @ModelAttribute("game") Game game,
                                 @RequestParam("gameUserList") Set<GameUser> gameUsers,
                                 @RequestParam("place") List<Double> places,
-                                Model model4, String message
-    ) {model1.addAttribute("gameUsers", engineService.findAllGameUsers());
+                                Model model4, Model model5
+    ) {
+        model1.addAttribute("gameUsers", engineService.findAllGameUsers());
         playedGameValidator.validate(playedGame, bindingResult);
-        scoreValidator.validate(score, bindingResult1);
         model3.addAttribute("score", new Score());
         model2.addAttribute("games", engineService.findAllGames());
         model.addAttribute("playedGame", playedGame);
-
-        if (bindingResult.hasErrors() || bindingResult1.hasErrors() || gameUsers.size() < places.size()) {
-            System.out.println("BINDING RESULT ERROR");
-
+        if (gameUsers.size() < places.size() || bindingResult.hasErrors()) {
+            if (gameUsers.size() < places.size()) {
+                model5.addAttribute("user_error_message", "Один игрок не может иметь несколько мест");
+                System.out.println("MainPageController: PLAYED GAME VALIDATE ERROR WITH MESSAGE : one user cannot have more than one place METHOD: POST URL: /addPlayedGame");
+            }
+            if (bindingResult.hasErrors()) {
+                System.out.println("MainPageController: PLAYED GAME VALIDATE ERROR METHOD: POST URL: /addPlayedGame");
+            }
             return "main_page";
         } else {
-            model4.addAttribute("success_message" ,message="Игра успешно добавлена");
+            model4.addAttribute("success_message", "Игра успешно добавлена");
             engineService.savePlayedGame(playedGame);
 
             for (GameUser gameUser1 : gameUsers) {
@@ -81,8 +87,8 @@ public class MainPageController {
             }
 
 
-            return "main_page";
         }
+        return "main_page";
     }
 
 }

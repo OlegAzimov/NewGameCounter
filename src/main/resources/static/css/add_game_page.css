@@ -1,0 +1,79 @@
+
+.place_images{
+    padding-left: 600px;
+    padding-top: 100px;
+}
+.score_name{
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    margin-right: 5vh;
+    margin-left: 7vh;
+
+    margin-top: 10vh;
+    display: inline-block;
+    font-weight: bold;
+}
+.score_place{
+    justify-content: center;
+    display: inline-block;
+}
+.input-game {
+    margin: 10px 0;
+}
+.p-game {
+    font-size: 17px;
+    display: flex;
+    font-weight: bold;
+    justify-content: center;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #f5e7c3;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 25rem;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #e0c060;
+    text-decoration: none;
+    cursor: pointer;
+}
+.ok-not-buttons {
+    display: flex;
+    gap: 25px;
+}
+.delete {
+    background-color: antiquewhite;
+}
+
+.delete-text {
+    font-size: 20px;
+}

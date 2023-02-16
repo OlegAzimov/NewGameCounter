@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-played-game-table
+      author: El Sklonny
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: played_game
+      changes:
+        - createTable:
+            tableName: played_game
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: number
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: game_name_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_played_game_games
+                    references: games(id)
+                    nullable: false

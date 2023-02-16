@@ -26,6 +26,7 @@ public class AddToGameListValidator implements Validator {
         Game game = (Game) target;
         if (engineService.findGameByGameName(game.getGameName()) != null) {
             errors.rejectValue("gameName", "", "Эта игра уже занесена в список");
+            System.out.println("game " + game.getGameName() + " is already listed");
         }
 
     }

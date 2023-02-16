@@ -24,9 +24,17 @@ public class PlayedGameValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         PlayedGame playedGame = (PlayedGame) target;
+        int number = playedGame.getNumber();
         if (engineService.findPlayedGame(playedGame.getDate(), playedGame.getGameName(), playedGame.getNumber()).isPresent()) {
             errors.rejectValue("number", "", "Такая игра уже существует");
+            System.out.println("game " + playedGame.getGameName().getGameName() + " date: " + playedGame.getDate() + " number: " + playedGame.getNumber() + " already exists");
         }
-
+        if(number > 1){
+            number--;
+            if (engineService.findPlayedGame(playedGame.getDate(), playedGame.getGameName(), number).isEmpty()) {
+                errors.rejectValue("number", "", "Добавьте предыдущую игру");
+                System.out.println("no previous game found");
+            }
+        }
     }
 }

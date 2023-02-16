@@ -1,0 +1,33 @@
+.body1{
+
+    display: flex;
+    flex-direction: column;
+}
+
+.closeModal {
+    position: absolute;
+    display: inline-block;
+    opacity: 0.4;
+    cursor: pointer;
+    transition: opacity ease 0.5s;}
+
+
+.closeModal::before,
+.closeModal::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    display: block;
+    width: 24px;
+    height: 3px;
+    background: #000;
+}
+
+.closeModal::before {
+    transform: rotate(45deg);
+}
+
+.closeModal::after {
+    transform: rotate(-45deg);
+}
+
