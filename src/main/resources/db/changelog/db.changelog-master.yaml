@@ -1,13 +1,13 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/changeset/create-game-table.yml
+      file: db/changelog/changeset/1-create-games-table.yml
   - include:
-      file: db/changelog/changeset/create-game-user-table.yml
+      file: db/changelog/changeset/2-create-game-user-table.yml
   - include:
-      file: db/changelog/changeset/create-played-game-table.yml
+      file: db/changelog/changeset/5-create-played-game-table.yml
   - include:
-      file: db/changelog/changeset/create-played-game-table-constraint.yml
+      file: db/changelog/changeset/6-create-played-game-table-constraint.yml
   - include:
-      file: db/changelog/changeset/create-score-table.yml
+      file: db/changelog/changeset/7-create-score-table.yml
   - include:
-      file: db/changelog/changeset/add-columns-to-game-user.yml
+      file: db/changelog/changeset/3-add-columns-to-game-user.yml
