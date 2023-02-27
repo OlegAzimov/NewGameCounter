@@ -1,6 +1,24 @@
 var countOfFields = 1;
 var maxFieldLimit = 12;
-
+var number = 2;
+function checkForm() {
+    let validated = true
+    let validNumber = document.getElementById("number").value < 1
+    if(validNumber){
+        validated = false
+        document.getElementById("errorNumber").hidden = false
+    }
+    let placeArray = document.getElementsByClassName("place")
+    for (let i = 0; i < placeArray.length; i++) {
+        if (placeArray[i].value < 1){
+            validated = false
+            document.getElementById("errorPlaces").hidden = false
+        }
+    }
+    if(validated) {
+        document.getElementById("addPlayedGameAndScore").submit()
+    }
+}
 function deleteField(a) {
     var contDiv = a.parentNode;
     let deleteId = (contDiv.getAttribute("id"))
@@ -18,7 +36,7 @@ function addField(number) {
         return false;
     }
     countOfFields++;
-    var form = document.forms[1]
+    var form = document.forms[0]
     let div = document.getElementById(number)
     let new_div = div.cloneNode(true)
     new_div.setAttribute("id", number + 1)
