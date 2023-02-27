@@ -30,4 +30,7 @@
 .closeModal::after {
     transform: rotate(-45deg);
 }
-
+.error-div {
+    margin: 5px 0;
+    color: red;
+}
