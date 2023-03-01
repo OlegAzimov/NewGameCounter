@@ -127,7 +127,7 @@ header {
     .a-logout{
         display: flex;
     }
-    .logout, .profile, .sex {
+    .logout, .profile, .sex, .game {
         display: none;
     }
     .logoutButton {
