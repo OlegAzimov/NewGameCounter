@@ -46,7 +46,7 @@
             </div>
             <div class="label-select-div">
                 <label for="date">Выберите дату игры </label>
-                <input oninput="checkDate()" th:max="*{date}" min="2021-01-01" class="form-control" type="date" id="date" th:field="*{date}"/>
+                <input oninput="checkDate()" min="2021-01-01" class="form-control" type="date" id="date" th:field="*{date}"/>
                 <div style="color: red" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">date Error</div>
                 <div class="error-div" id="errorDate" hidden th:text="'Невалидная дата игры'">date Error
                 </div>

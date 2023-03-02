@@ -6,24 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="shortcut icon" href="\img\dice.ico" type="image/x-icon">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="\css\score_page.css" rel="stylesheet">
     <link href="\css\app.css" rel="stylesheet">
-    <script>
-        function allUncheck() {
-            document.getElementsByName('gameList').forEach(el => {
-                el.checked = false
-            });
-        }
-
-        function allCheck() {
-            document.getElementsByName('gameList').forEach(el => {
-                el.checked = true
-            })
-        }
-
-    </script>
 </head>
 <body background="\img\back.png">
 
@@ -33,12 +20,10 @@
             <p class="text1">Game Counter</p>
         </div>
         <div class="logoutButton">
-            <form th:action="@{/profile}" th:method="GET">
-                <input class="btn btn-warning" type="submit" value="Профиль"/>
-            </form>
-            <form th:action="@{/logout}" th:method="POST">
-                <input class="btn btn-warning" type="submit" value="Выход"/>
-            </form>
+            <a class="a-logout" href="/profile"><i class="bi bi-person"></i></a>
+            <a class="btn btn-warning profile" href="/profile">Профиль</a>
+            <a class="logout" href="/logout">Выйти</a>
+            <a class="a-logout" href="/logout"><i class="bi bi-door-open"></i></a>
         </div>
     </div>
 </header>
@@ -68,10 +53,14 @@
             </div>
             <br>
             <div class="add_game_button">
-                <a class="btn btn-warning" onclick href="/main_page">Занести игру</a>
+                <a class="btn btn-warning" href="/main_page">Занести игру</a>
             </div>
         </div>
+        <div class="history-button">
+            <a class="btn btn-warning" href="/history">История игр</a>
+        </div>
     </div>
+    <button class="btn btn-warning bar-button" onclick="toggle()"><i class="bi bi-layout-text-sidebar"></i></button>
     <div class="filter">
         <form style="color: black" th:method="POST" th:action="@{/filter}" id="gameList">
             <div id="checkbox-container">
@@ -86,7 +75,7 @@
             </div>
             <div class="buttons">
                 <div class="all-nothing-buttons">
-                    <input class="btn btn-warning" type="button" onclick="allCheck()" value="Выбрать"/>
+                    <input class="btn btn-warning" type="button" onclick="allCheck()" value="Выбрать все"/>
                     <input class="btn btn-warning" type="button" onclick="allUncheck()" value="Сбросить"/>
                 </div>
                 <input class="btn btn-warning" type="submit" value="Фильтр"/>
@@ -95,10 +84,38 @@
 
 
         <br>
-        <a class="btn btn-warning" onclick href="/add_game_page">Новая игра</a>
+        <a class="btn btn-warning" onclick href="/add_game_page">Настройки игр</a>
     </div>
 
+    <div class="sidebar">
+        <div class="blocker"></div>
+        <div class="content">
+            <a class="bar-a" href="/history">История игр<i class="bi bi-clock-history"></i></a>
+            <a class="bar-a" href="/add_game_page">Настройки игр<i class="bi bi-tools"></i></a>
+            <div class="bar-filter">
+                <form style="color: black" th:method="POST" th:action="@{/filter}">
+                    <div id="bar-checkbox-container">
+                        <div th:each="game : ${games}">
 
+                            <input class="form-check-input" name="gameList" type="checkbox" th:value="${game.getId}"
+                                   th:id="'bar'+${game.getId}">
+                            <label th:for="${game.getId}" th:text="${game.getGameName}"></label>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <div class="all-nothing-buttons">
+                            <input class="btn btn-warning " type="button" onclick="allCheck()" value="Выбрать все"/>
+                            <input class="btn btn-warning" type="button" onclick="allUncheck()" value="Сбросить"/>
+                        </div>
+                        <input class="btn btn-warning" type="submit" value="Фильтр"/>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"

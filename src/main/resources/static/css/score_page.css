@@ -41,10 +41,12 @@
     flex-direction: row;
     gap: 7px;
 }
+
 .all-nothing-buttons input {
     background: #fff0c9;
     color: #b3622a;
 }
+
 .add_game_button {
     margin-left: 8%;
     margin-right: 8%;
@@ -91,6 +93,7 @@
     align-self: flex-start;
     padding: 30px;
 }
+
 .bar-button {
     display: none;
     height: fit-content;
@@ -102,6 +105,7 @@
     color: #e77e02;
     font-size: 20px;
 }
+
 .bar-a {
     display: flex;
     margin-left: 5%;
@@ -110,13 +114,58 @@
     text-decoration: none;
     font-size: 20px;
 }
+
 .bar-a:hover {
     color: #954712;
 }
+
 .bi-clock-history::before, .bi-tools::before {
     color: #B26129;
     font-size: 20px;
 }
+
+.sidebar { /* it's a mobile sidebar, blocker and content */
+    position: fixed;
+    left: 0;
+    width: 100vw; /* to cover the whole screen */
+    height: 100vh;
+    padding: 0; /* to override the default padding */
+    background: rgba(0, 0, 0, .5); /* half transparent background */
+    display: none;
+    z-index: 99999; /* to be on top of any other elements */
+}
+
+.sidebar.visible {
+    display: block;
+}
+
+/*cover the whole screen and to detect user click on background */
+.sidebar .blocker {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* user content */
+.sidebar .content {
+    position: absolute;
+    background-image: url(../img/filter_back15.png);
+    height: 100%;
+    width: 280px;
+    right: -50%; /* will be animated to left: 0, by animation */
+    animation: slide 0.5s forwards;
+}
+
+@keyframes slide {
+    100% {
+        right: 0;
+    }
+}
+
+.sidebar .content {
+    padding: 12px;
+}
+
 @media screen and (max-width: 768px) {
     .filter {
         position: relative;
@@ -156,44 +205,8 @@
     }
 }
 
-.sidebar { /* it's a mobile sidebar, blocker and content */
-    position: fixed;
-    left: 0;
-    width: 100vw; /* to cover the whole screen */
-    height: 100vh;
-    padding: 0; /* to override the default padding */
-    background: rgba(0, 0, 0, .5); /* half transparent background */
-    display: none;
-    z-index: 99999; /* to be on top of any other elements */
-}
-
-.sidebar.visible {
-    display: block;
-}
-
-/*cover the whole screen and to detect user click on background */
-.sidebar .blocker {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-/* user content */
-.sidebar .content {
-    position: absolute;
-    background-image: url(../img/filter_back15.png);
-    height: 100%;
-    width: 250px;
-    right: -50%; /* will be animated to left: 0, by animation */
-    animation: slide 0.5s forwards;
-}
-
-@keyframes slide {
-    100% {
-        right: 0;
+@media screen and (max-width: 320px) {
+    .sidebar .content {
+        width: 250px;
     }
-}
-
-.sidebar .content {
-    padding: 12px;
 }

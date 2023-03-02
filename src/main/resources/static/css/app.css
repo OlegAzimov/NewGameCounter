@@ -51,6 +51,10 @@ header {
 .logout:hover {
     color: #cd7634;
 }
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
 
 .mainCard {
     align-self: center;
@@ -65,10 +69,11 @@ header {
 }
 
 .close {
+    display: flex;
     color: #aaa;
-    float: right;
     font-size: 28px;
     font-weight: bold;
+    justify-content: flex-start;
 }
 
 .close:hover,

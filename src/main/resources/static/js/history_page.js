@@ -14,6 +14,7 @@ getPagination('#table');
 function getPagination(table) {
     var lastPage = 1;
     document.getElementById('size').innerHTML = gamesSize;
+    document.getElementById('mobileSize').innerHTML = gamesSize;
     $('#maxRows')
         .on('change', function (evt) {
             //$('.paginationprev').html('');						// reset pagination
@@ -26,10 +27,11 @@ function getPagination(table) {
             var trnum = 0; // reset tr counter
             var maxRows = parseInt($(this).val()); // get Max Rows from select option
             document.getElementById('page').innerHTML = $(this).val();
-
+            document.getElementById('mobilePage').innerHTML = $(this).val();
             if (maxRows === 5000 || gamesSize <= maxRows) {
                 $('.pagination').hide();
                 document.getElementById('page').innerHTML = "всех";
+                document.getElementById('mobilePage').innerHTML = "всех";
             } else {
                 $('.pagination').show();
             }
@@ -151,6 +153,51 @@ $(function () {
         $(this).prepend('<td>' + id + '</td>');
     });
 });
+
+function findData(values, searchEl) {
+    let find = false
+    values.some(value => value.includes(searchEl) ? find = true : '')
+    return find
+}
+
+$(document).ready(function () {
+    // Filter table rows based on searched searchEl
+    $("#search").on("keyup", function () {
+        var searchEl = $(this).val().toLowerCase();
+        if (searchEl === "") {
+            getPagination('#table');
+        } else {
+            $("table tbody tr").each(function () {
+                $row = $(this);
+                let divs = $row.children()[4]
+                    .childNodes[3]
+                    .childNodes[1]
+                    .childNodes[3].getElementsByClassName("data")
+                let values = []
+                Array.prototype.filter.call(
+                    divs,
+                    (div) => values.push(div.innerHTML.toLowerCase())
+                )
+                let name = $row.find("td:nth-child(2)").text().toLowerCase();
+                let data = $row.find("td:nth-child(3)").text().toLowerCase();
+                let number = $row.find("td:nth-child(4)").text().toLowerCase();
+                if (name.search(searchEl) < 0 && data.search(searchEl) < 0 && number.search(searchEl) < 0 && !findData(values, searchEl)) {
+                    $row.hide();
+                } else {
+                    $row.show();
+                }
+            });
+        }
+    });
+});
+
+function openScorePopup(button) {
+    button.parentNode.childNodes[3].style.display = "flex";
+}
+
+function closeScorePopup(button) {
+    button.parentNode.parentNode.style.display = "none"
+}
 
 //  Developed By Yasser Mas
 // yasser.mas2@gmail.com

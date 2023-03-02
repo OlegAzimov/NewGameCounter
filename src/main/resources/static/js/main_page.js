@@ -9,7 +9,12 @@ a.setAttribute('class', 'deleteModal')
 a.setAttribute('onclick', 'deleteField(this)')
 a.appendChild(i) // add icon to delete button
 errorDate = document.getElementById("errorDate") // error div of date
+document.getElementById("date").max = new Date().toLocaleDateString('fr-ca') // set max date to game date input
 errorPlaces = document.getElementById("errorPlaces") // error div of places
+console.log(parseInt(document.getElementById("number").value) === 0);
+document.getElementById("date").value ? ' ' : document.getElementById("date").value = new Date().toLocaleDateString('fr-ca') // set current date if played game has no date
+parseInt(document.getElementById("number").value) === 0 ? document.getElementById("number").value = 1 : '' // set 1 to game number if played game has no number
+
 function checkPlaces() {
     let inputs = document.getElementsByClassName("place") // get all input of places
     let places = [] // create array for place values
@@ -50,7 +55,7 @@ function checkDate() {
     }
     var d = new Date(date) // current date
     var from = new Date("01/01/2021").getTime()  // min date
-    var to = new Date(document.getElementById("date").max).getTime() // max date
+    var to = new Date(new Date().toLocaleDateString('fr-ca')).getTime() // max date
     if (d.getTime() < from) {
         errorDate.innerText = "Что за дед?"
         document.getElementById("errorDate").hidden = false

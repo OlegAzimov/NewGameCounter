@@ -35,13 +35,9 @@ public class MainPageController {
     public String gameForm(Model model, @ModelAttribute("gameUser") GameUser gameUser,
                            Model model2, @ModelAttribute("game") Game game,
                            Model model3) {
-
         model.addAttribute("gameUsers", engineService.findAllGameUsers());
         model2.addAttribute("games", engineService.findAllGames());
-        PlayedGame playedGame = new PlayedGame();
-        playedGame.setNumber(1);
-        playedGame.setDate(java.sql.Date.valueOf(LocalDate.now()));
-        model3.addAttribute("playedGame", playedGame);
+        model3.addAttribute("playedGame", new PlayedGame());
         return ("main_page");
 
     }
