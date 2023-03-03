@@ -51,7 +51,7 @@
                         <option value="20">20</option>
                         <option value="50">50</option>
                         <option value="100">100</option>
-                        <option value="5000">Показать все</option>
+                        <option value="5000">все</option>
                     </select>
                     <p class="p">строк</p>
                 </div>
@@ -59,13 +59,18 @@
                     <input id="search" type="text" class="form-control" placeholder="Поиск&hellip;">
                 </div>
             </div>
+            <div class="head-table-row">
+                <div>Игра <i class="bi sort-game-m bi-sort-alpha-down"></i></div>
+                <div>Дата <i class="bi sort-date-m bi-sort-numeric-down-alt"></i></div>
+                <div>Номер <i class="bi sort-number-m bi-sort-numeric-down-alt"></i></div>
+            </div>
             <table class="table table-striped table-class" id="table">
                 <thead>
                 <tr>
-                    <th>Игра</th>
-                    <th>Дата</th>
-                    <th>Номер</th>
-                    <th>Места</th>
+                    <th>Игра <i class="bi sort-game bi-sort-alpha-down"></i></th>
+                    <th>Дата <i class="bi sort-date bi-sort-numeric-down-alt"></i></th>
+                    <th>Номер <i class="bi sort-number bi-sort-numeric-down-alt"></i></th>
+                    <th class="desktop-last-child">Места</th>
                 </tr>
                 </thead>
                 <tbody id="body">
@@ -73,10 +78,8 @@
                     <td th:text="${game.getGameName().gameName}"></td>
                     <td th:text="${game.getDate()}"></td>
                     <td th:text="${game.getNumber()}"></td>
-                    <td>
-                        <button class="btn btn-warning" onclick="openScorePopup(this)">
-                            <p class="button-p">показать</p>
-                            <i class="bi bi-card-list"></i>
+                    <td class="desktop-last-child">
+                        <button class="btn btn-warning" onclick="openScorePopup(this)">показать
                         </button>
                         <div class="modal">
                             <div class="modal-content">
@@ -93,6 +96,45 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </td>
+                    <td class="mobile-td">
+                        <div class="mobile-td-div">
+                            <div class="title-div-table">Игра</div>
+                            <div th:text="${game.getGameName().gameName}"></div>
+                        </div>
+                        <div class="mobile-td-div">
+                            <div class="title-div-table">Номер</div>
+                            <div th:text="${game.getNumber()}"></div>
+                        </div>
+                    </td>
+                    <td class="mobile-td">
+                        <div class="mobile-td-div">
+                            <div class="title-div-table">Дата</div>
+                            <div th:text="${game.getDate()}"></div>
+                        </div>
+                        <div class="mobile-td-div">
+                            <div class="title-div-table">Места</div>
+                            <button class="btn btn-warning" onclick="mobileOpenScorePopup   (this)">
+                                <i class="bi bi-card-list"></i>
+                            </button>
+                            <div class="modal">
+                                <div class="modal-content">
+                                    <span onclick="closeScorePopup(this)" class="close">&times;</span>
+                                    <div class="table table-striped div-table">
+                                        <div class="head-table-div">
+                                            <div class="first-td">Игрок</div>
+                                            <div class="second-td">Место</div>
+                                        </div>
+                                        <div class="body-table-div" th:each="score : ${game.getScores()}">
+                                            <div class="first-td data"
+                                                 th:text="${score.getGameUserScore().getName()}"></div>
+                                            <div class="second-td data" th:text="${score.getIntPlace()}"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </td>
                 </tr>
@@ -115,7 +157,6 @@
                         </li>
                     </ul>
                 </nav>
-
             </div>
         </div>
     </div>

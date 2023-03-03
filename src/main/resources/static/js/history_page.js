@@ -9,6 +9,9 @@ getPagination('#table');
 - fade out all tr lt max rows * li num - max rows ((5*pagenum 2 = 10) - 5)
 - fade in all tr between (maxRows*PageNum) and (maxRows*pageNum)- MaxRows
 */
+var sortGame = window.matchMedia("screen and (max-width: 500px)").matches ? sortGame = document.querySelector(".sort-game-m") : sortGame = document.querySelector(".sort-game")
+var sortDate = window.matchMedia("screen and (max-width: 500px)").matches ? sortDate = document.querySelector(".sort-date-m") : sortDate = document.querySelector(".sort-date")
+var sortNumber = window.matchMedia("screen and (max-width: 500px)").matches ? sortNumber = document.querySelector(".sort-number-m") : sortNumber = document.querySelector(".sort-number")
 
 
 function getPagination(table) {
@@ -78,17 +81,17 @@ function getPagination(table) {
 
                 var maxRows = parseInt($('#maxRows').val()); // get Max Rows from select option
 
-                if (pageNum === 'prev') {
-                    if (lastPage === 1) {
+                if (pageNum === 'prev' || pageNum < lastPage) {
+                    if (parseInt(lastPage) === 1) {
                         return;
                     }
-                    pageNum = --lastPage;
+                    pageNum === 'prev' ? pageNum = --lastPage : ''
                 }
-                if (pageNum === 'next') {
-                    if (lastPage === $('.pagination li').length - 2) {
+                if (pageNum === 'next' || pageNum > lastPage) {
+                    if (parseInt(lastPage) === $('.pagination li').length - 2) {
                         return;
                     }
-                    pageNum = ++lastPage;
+                    pageNum === 'next' ? pageNum = ++lastPage : ''
                 }
 
                 lastPage = pageNum;
@@ -122,8 +125,6 @@ function getPagination(table) {
 }
 
 function limitPagging() {
-    // alert($('.pagination li').length)
-
     if ($('.pagination li').length > 7) {
         if ($('.pagination li.active').attr('data-page') <= 3) {
             $('.pagination li:gt(10)').hide();
@@ -195,9 +196,126 @@ function openScorePopup(button) {
     button.parentNode.childNodes[3].style.display = "flex";
 }
 
+function mobileOpenScorePopup(button) {
+    button.parentNode.childNodes[5].style.display = "flex";
+}
+
 function closeScorePopup(button) {
     button.parentNode.parentNode.style.display = "none"
 }
 
-//  Developed By Yasser Mas
-// yasser.mas2@gmail.com
+
+function sortByGame(direction) {
+    let tbody = document.querySelector("#table tbody")
+    // get trs as array for ease of use
+    let rows = [].slice.call(tbody.querySelectorAll("tr"))
+
+    if (direction === 'asc') {
+        sortGame.classList.remove('bi-sort-alpha-down')
+        sortGame.classList.add('bi-sort-alpha-up')
+        rows.sort(function (a, b) {
+            return (
+                (a.cells[1].innerHTML.trim().localeCompare(b.cells[1].innerHTML.trim()))
+            )
+        })
+    } else {
+        sortGame.classList.remove('bi-sort-alpha-up')
+        sortGame.classList.add('bi-sort-alpha-down')
+        rows.sort(function (a, b) {
+            return (
+                (b.cells[1].innerHTML.trim().localeCompare(a.cells[1].innerHTML.trim()))
+            )
+        })
+    }
+
+    rows.forEach(function (v) {
+        tbody.appendChild(v)
+    })
+}
+
+sortGame.addEventListener("click", () => {
+    if (sortGame.classList.contains('bi-sort-alpha-down')) {
+        sortByGame('asc')
+    } else {
+        sortByGame('desc')
+    }
+})
+
+function convertDate(d) {
+    var p = d.split("-")
+    return +(p[0] + p[1] + p[2])
+}
+
+function sortByDate(direction) {
+    let tbody = document.querySelector("#table tbody")
+    // get trs as array for ease of use
+    let rows = [].slice.call(tbody.querySelectorAll("tr"))
+
+    if (direction === 'asc') {
+        sortDate.classList.remove('bi-sort-numeric-down-alt')
+        sortDate.classList.add('bi-sort-numeric-up-alt')
+        rows.sort(function (a, b) {
+            return (
+                convertDate(b.cells[2].innerHTML) -
+                convertDate(a.cells[2].innerHTML)
+            )
+        })
+    } else {
+        sortDate.classList.remove('bi-sort-numeric-up-alt')
+        sortDate.classList.add('bi-sort-numeric-down-alt')
+        rows.sort(function (a, b) {
+            return (
+                convertDate(a.cells[2].innerHTML) -
+                convertDate(b.cells[2].innerHTML)
+            )
+        })
+    }
+
+    rows.forEach(function (v) {
+        tbody.appendChild(v)
+    })
+}
+
+sortDate.addEventListener("click", () => {
+    if (sortDate.classList.contains('bi-sort-numeric-down-alt')) {
+        sortByDate('asc');
+    } else {
+        sortByDate('desc');
+    }
+})
+
+function sortByNumber(direction) {
+    let tbody = document.querySelector("#table tbody")
+    // get trs as array for ease of use
+    let rows = [].slice.call(tbody.querySelectorAll("tr"))
+
+    if (direction === 'asc') {
+        rows.sort(function (a, b) {
+            sortNumber.classList.remove('bi-sort-numeric-down-alt')
+            sortNumber.classList.add('bi-sort-numeric-up-alt')
+            return (
+                b.cells[3].innerHTML - a.cells[3].innerHTML
+            )
+        })
+    } else {
+        rows.sort(function (a, b) {
+            sortNumber.classList.remove('bi-sort-numeric-up-alt')
+            sortNumber.classList.add('bi-sort-numeric-down-alt')
+            return (
+                a.cells[3].innerHTML - b.cells[3].innerHTML
+            )
+        })
+    }
+
+    rows.forEach(function (v) {
+        tbody.appendChild(v);
+    });
+}
+
+sortNumber.addEventListener("click", () => {
+    if (sortNumber.classList.contains('bi-sort-numeric-down-alt')) {
+        sortByNumber('asc');
+    } else {
+        sortByNumber('desc');
+    }
+});
