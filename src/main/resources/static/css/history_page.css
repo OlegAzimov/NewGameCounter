@@ -143,10 +143,12 @@ table.table td a {
     margin-top: 6px;
     font-size: 95%;
 }
+
 .show-button {
     background: #fcf1d5;
     color: #ffc107;
 }
+
 .search-box input:focus, .form-group select:focus {
     border-color: #fbdd8d;
 }
@@ -206,9 +208,21 @@ table.table td a {
 .title-div-table {
     color: #84757d;
 }
-
+nav {
+    align-self: center;
+}
+/*.blocker {*/
+/*    position: absolute;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*}*/
 .mobile-td-div {
     margin: 5px 0;
+}
+
+.clearfix {
+    display: flex;
+    flex-direction: column;
 }
 
 .head-table-row {
@@ -218,21 +232,26 @@ table.table td a {
     padding: 10px 0;
     justify-content: space-between;
 }
+
 @media screen and (max-width: 768px) {
     .p-select {
         width: 35%;
     }
+
     .search-box {
         width: 40%;
     }
 }
+
 @media screen and (max-width: 500px) {
     td, table > thead, .desktop, .button-p {
         display: none;
     }
+
     .game-name {
         width: 240px !important;
     }
+
     .head-table-row {
         display: flex;
     }
@@ -263,6 +282,7 @@ table.table td a {
     .p-select, .search-box {
         width: 100%;
     }
+
     .flex-row {
         flex-direction: column !important;
         gap: 10px;
@@ -274,16 +294,30 @@ table.table td a {
 
 }
 
-@media screen and (max-width: 376px) {
+@media screen and (max-width: 400px) {
     .modal-content {
         width: 20rem;
     }
+
     .game-name {
         width: 200px !important;
     }
 }
+
+@media screen and (max-width: 355px) {
+    .game-name {
+        width: 165px !important;
+    }
+}
+
 @media screen and (max-width: 320px) {
     .game-name {
         width: 150px !important;
+    }
+}
+
+@media screen and (max-width: 310px) {
+    .game-name {
+        width: 120px !important;
     }
 }

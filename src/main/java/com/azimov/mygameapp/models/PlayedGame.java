@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -51,6 +52,7 @@ public class PlayedGame {
     }
 
     public List<Score> getScores() {
+        scores.sort(Comparator.comparing(Score::getPlace));
         return scores;
     }
 

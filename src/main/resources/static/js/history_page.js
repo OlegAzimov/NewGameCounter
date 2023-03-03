@@ -1,4 +1,4 @@
-getPagination('#table');
+getPagination('#table')
 // getPagination('.table-class');
 //getPagination('table');
 
@@ -12,8 +12,12 @@ getPagination('#table');
 var sortGame = window.matchMedia("screen and (max-width: 500px)").matches ? sortGame = document.querySelector(".sort-game-m") : sortGame = document.querySelector(".sort-game")
 var sortDate = window.matchMedia("screen and (max-width: 500px)").matches ? sortDate = document.querySelector(".sort-date-m") : sortDate = document.querySelector(".sort-date")
 var sortNumber = window.matchMedia("screen and (max-width: 500px)").matches ? sortNumber = document.querySelector(".sort-number-m") : sortNumber = document.querySelector(".sort-number")
-
-
+//
+// document.querySelectorAll('.modal').forEach((modal) => {
+//     modal.querySelector('.blocker').addEventListener("click", () => {
+//         modal.style.display = 'none'
+//     })
+// })
 function getPagination(table) {
     var lastPage = 1;
     document.getElementById('size').innerHTML = gamesSize;
@@ -204,6 +208,10 @@ function closeScorePopup(button) {
     button.parentNode.parentNode.style.display = "none"
 }
 
+
+window.onload = function() {
+    sortByDate("asc")
+}
 
 function sortByGame(direction) {
     let tbody = document.querySelector("#table tbody")
