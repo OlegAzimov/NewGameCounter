@@ -18,7 +18,6 @@
 .filter, .bar-filter {
     flex-direction: column;
     width: fit-content;
-    max-width: 30%;
     position: absolute;
     height: 100%;
     font-size: large;
@@ -26,6 +25,7 @@
 }
 
 .filter {
+    max-width: 30%;
     background-image: url("../img/filter_back15.png");
     padding: 40px 10px 30%;
 }
@@ -198,7 +198,10 @@
     .history-button {
         display: none;
     }
-
+    .img_and_places {
+        width: 60%;
+        max-width: none;
+    }
     .bar-button {
         display: flex;
     }
