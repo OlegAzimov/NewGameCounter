@@ -1,15 +1,4 @@
-
-
-.btn btn-warning{
-
-    right:5px;
-    left:4px;
-    top:2px;
-    bottom:4px;
-    font-weight: bold;
-}
-
-.score_name{
+.score_name {
     justify-content: center;
     align-items: center;
     height: auto;
@@ -19,89 +8,223 @@
     display: inline-block;
     font-weight: bold;
 }
-.score_place{
+
+.score_place {
     justify-content: center;
     display: inline-block;
 
 }
-.filter {
+
+.filter, .bar-filter {
     flex-direction: column;
     width: fit-content;
     position: absolute;
     height: 100%;
-    background-image: url("../img/filter_back15.png");
     font-size: large;
-    padding: 40px 10px 30%;
-
-
-
+    padding: 10px 10px 30%;
 }
+
+.filter {
+    max-width: 30%;
+    background-image: url("../img/filter_back15.png");
+    padding: 40px 10px 30%;
+}
+
 .buttons {
     display: flex;
     flex-direction: column;
     gap: 15px;
     align-items: flex-start;
 }
+
 .all-nothing-buttons {
     display: flex;
     flex-direction: row;
     gap: 7px;
 }
-.add_game_button{
+
+.all-nothing-buttons input {
+    background: #fff0c9;
+    color: #b3622a;
+}
+
+.add_game_button {
     margin-left: 8%;
     margin-right: 8%;
 }
-.place_images{
+
+.place_images {
     float: left;
     width: 2%;
     height: 100%;
     margin-top: 13%;
 }
-.img_and_places{
+
+.img_and_places {
     display: flex;
     align-items: center;
     width: 60%;
     margin-left: auto;
 }
-.places{
+
+.places {
     align-items: center;
     height: 100%;
     margin-top: 15%;
 }
-.filter_score{
+
+.filter_score {
     display: flex;
 
 }
-.place_img{
+
+.place_img {
     padding-bottom: 50%;
 }
-.places_and_button{
+
+.places_and_button {
     margin-top: 3.5%;
     display: flex;
     flex-direction: column;
 }
-@media screen and (max-width: 768px){
-   .filter{
-       position: relative;
-   }
-    .place_images{
+
+.history-button {
+    display: flex;
+    margin-left: auto;
+    align-self: flex-start;
+    padding: 30px;
+}
+
+.bar-button {
+    display: none;
+    height: fit-content;
+    margin-top: 5%;
+    margin-right: 10px;
+}
+
+.bi-layout-text-sidebar::before {
+    color: #e77e02;
+    font-size: 20px;
+}
+
+.bar-a {
+    display: flex;
+    margin-left: 5%;
+    gap: 10px;
+    color: #B26129;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.bar-a:hover {
+    color: #954712;
+}
+
+.bi-clock-history::before, .bi-tools::before {
+    color: #B26129;
+    font-size: 20px;
+}
+
+.sidebar { /* it's a mobile sidebar, blocker and content */
+    position: fixed;
+    left: 0;
+    width: 100vw; /* to cover the whole screen */
+    height: 100vh;
+    padding: 0; /* to override the default padding */
+    background: rgba(0, 0, 0, .5); /* half transparent background */
+    display: none;
+    z-index: 99999; /* to be on top of any other elements */
+}
+
+.sidebar.visible {
+    display: block;
+}
+
+/*cover the whole screen and to detect user click on background */
+.sidebar .blocker {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* user content */
+.sidebar .content {
+    position: absolute;
+    background-image: url(../img/filter_back15.png);
+    height: 100%;
+    width: 310px;
+    right: -50%; /* will be animated to left: 0, by animation */
+    animation: slide 0.5s forwards;
+}
+@keyframes slide {
+    100% {
+        right: 0;
+    }
+}
+
+.sidebar .content {
+    padding: 12px;
+}
+
+@media screen and (max-width: 768px) {
+    .filter {
+        position: relative;
+        max-width: 40%;
+    }
+    .add_game_button {
+        margin: 0;
+    }
+    .place_images {
         display: none;
     }
-    .places{
+
+    .places {
         align-items: flex-start;
         height: 100%;
 
     }
-    .score_name{
+    .img_and_places {
+        align-items: flex-start;
+        width: fit-content;
+        max-width: 50%;
+    }
+    .score_name {
         margin-right: 1vh;
         margin-left: 2vh;
     }
-    .places_and_button{
-        margin-top: auto;
+}
+
+@media screen and (max-width: 500px) {
+    .history-button {
+        display: none;
     }
-    .img_and_places{
-        display: block;
+    .img_and_places {
+        width: 60%;
+        max-width: none;
+    }
+    .bar-button {
+        display: flex;
+    }
+
+    .filter {
+        display: none;
+    }
+
+    .add_game_button {
+        margin: 0;
+    }
+}
+@media screen and (max-width: 376px) {
+    .sidebar .content {
+        width: 300px;
     }
 }
 
-
+@media screen and (max-width: 320px) {
+    .sidebar .content {
+        width: 250px;
+    }
+    .game-name {
+        width: 77%;
+    }
+}

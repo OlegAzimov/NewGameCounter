@@ -6,7 +6,10 @@ databaseChangeLog:
         - onFail: MARK_RAN
           not:
             - columnExists:
-                columnName: role, name
+                columnName: role
+                tableName: game_user
+            - columnExists:
+                columnName: name
                 tableName: game_user
       changes:
         - addColumn:

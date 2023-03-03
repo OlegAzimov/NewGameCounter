@@ -90,10 +90,7 @@ public class GameUser {
         return "GameUser{" +
                 "id=" + id +
                 ", scores=" + scores +
-                ", username='" + username + '\'' +
-                ", role='" + role + '\'' +
                 ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
                 '}';
     }
 }

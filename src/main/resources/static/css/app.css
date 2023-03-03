@@ -4,33 +4,58 @@ header {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fceabb', endColorstr='#fbdf93', GradientType=1);
     height: 4%;
 }
-.image{
+
+.image {
     padding: 7%;
 }
-.container{
+
+.container {
     padding-left: 450px;
     padding-top: 70px;
 }
+
 .header-box {
     display: flex;
-    width: 98%;
     justify-content: space-between;
 }
+
 .home_button {
     display: flex;
     align-items: center;
 }
+
 .text1 {
+    margin: 0;
+    text-decoration: none;
     font-size: 30px;
     font-weight: lighter;
     color: #2c3034;
 }
+
+.text1:hover {
+    color: #2c3034;
+}
+
 .logoutButton {
     display: flex;
     flex-direction: row;
     gap: 10px;
     align-items: center;
 }
+
+.logout {
+    color: #e77e02;
+    text-underline-offset: 2px;
+}
+
+.logout:hover {
+    color: #cd7634;
+}
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
 .mainCard {
     align-self: center;
     border: 1px silver;
@@ -41,4 +66,81 @@ header {
     padding: 5%;
     margin-top: 5%;
     margin-bottom: 2%;
+}
+.game-name {
+    width: 90%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.close {
+    display: flex;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    justify-content: flex-start;
+}
+
+.close:hover,
+.close:focus {
+    color: #e0c060;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    justify-content: center;
+    align-items: center;
+}
+.a-logout {
+    align-items: center;
+    display: none;
+}
+.bi-door-open::before, .bi-person::before, .bi-dice-6::before {
+    color: #e77e02;
+    font-size: 20px;
+}
+.bi-person::before{
+    margin-top: 3.5px;
+    font-size: 25px;
+}
+.form-check-input:checked {
+    background-color: #f9c12c;
+    border-color: #ffc107;
+}
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgb(251 228 168);
+}
+.form-control:focus, .form-select:focus {
+    border-color: #f9c63d;
+    box-shadow: 0 0 0 0.25rem rgb(251 228 168);
+}
+.form-check-input[type=checkbox] {
+    border-color: #ffc107;
+}
+.sex {
+    gap: 10px;
+}
+@media screen and (max-width: 500px) {
+    .mainCard {
+        width: 90%;
+    }
+    .a-logout{
+        display: flex;
+    }
+    .logout, .profile, .sex, .game {
+        display: none;
+    }
+    .logoutButton {
+        gap: 15px;
+    }
 }

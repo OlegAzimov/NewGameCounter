@@ -1,4 +1,5 @@
 package com.azimov.mygameapp.models;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -6,12 +7,14 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "score")
 public class Score {
+
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
-    @JoinColumn(name ="played_game_id", referencedColumnName = "id")
+    @JoinColumn(name = "played_game_id", referencedColumnName = "id")
     private PlayedGame owner;
 
     @ManyToOne
@@ -20,7 +23,7 @@ public class Score {
     @NotNull(message = "Выберите место игрока")
     @Min(value = 1, message = "Это значение не может быть меньше 1")
     @Column(name = "place")
-     private double place;
+    private double place;
 
 
     public int getId() {
@@ -51,10 +54,22 @@ public class Score {
         return place;
     }
 
+    public int getIntPlace() {
+        return (int)place;
+    }
+
     public void setPlace(double place) {
         this.place = place;
     }
 
     public Score() {
+    }
+
+    @Override
+    public String toString() {
+        return "Score{" +
+                "id=" + id +
+                ", place=" + place +
+                '}';
     }
 }

@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="shortcut icon" href="\img\dice.ico" type="image/x-icon">
     <link href="\css\profile_page.css" rel="stylesheet">
@@ -25,13 +27,15 @@
 <header>
     <div class="header-box">
         <div>
-            <p class="text1">Game Counter</p>
+            <a class="text1" href="/score_page">Game Counter</a>
         </div>
         <div class="logoutButton">
-            <a class="btn btn-warning" onclick href="/score_page">Оргия</a>
-            <form th:action="@{/logout}" th:method="POST">
-                <input class="btn btn-warning" type="submit" value="Выход"/>
-            </form>
+            <a class="a-logout" href="/score_page"><img src="\img\sex.svg" alt="Orgy" /></a>
+            <a class="btn btn-warning sex" onclick href="/score_page">Оргия</a>
+            <a class="logout" href="/logout">Выйти</a>
+            <a class="a-logout" href="/logout"><i class="bi bi-door-open"></i></a>
+
+
         </div>
     </div>
 </header>

@@ -3,31 +3,41 @@
     display: flex;
     flex-direction: column;
 }
-
-.closeModal {
-    position: absolute;
-    display: inline-block;
-    opacity: 0.4;
+.add-form, .add-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.add-buttons {
+    align-items: flex-start;
+    margin-top: 10px;
+}
+.label-select-div {
+    margin-bottom: 5px;
+}
+.deleteModal {
+    text-decoration: none;
+}
+.bi-x {
     cursor: pointer;
-    transition: opacity ease 0.5s;}
-
-
-.closeModal::before,
-.closeModal::after {
-    content: '';
-    position: absolute;
-    top: 5px;
-    display: block;
-    width: 24px;
-    height: 3px;
-    background: #000;
+    display: flex;
+    font-size: 25px;
+    color: #e58326;
+    align-items: center;
+    justify-content: flex-start;
 }
-
-.closeModal::before {
-    transform: rotate(45deg);
+.bi-x::before {
+    cursor: pointer;
 }
-
-.closeModal::after {
-    transform: rotate(-45deg);
+.error-div {
+    margin: 5px 0;
+    color: red;
 }
-
+@media screen and (max-width: 500px){
+    .add-buttons {
+        align-items: flex-end;
+    }
+    .bi-x {
+        justify-content: flex-end;
+    }
+}

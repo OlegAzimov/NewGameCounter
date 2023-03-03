@@ -34,6 +34,8 @@ public class PlayedGame {
     @Column(name = "number")
     private int number;
 
+
+
     public PlayedGame(Game gameName, Date date, int number) {
         this.gameName = gameName;
         this.date = date;
@@ -81,5 +83,13 @@ public class PlayedGame {
     }
 
     public PlayedGame() {
+    }
+    @Override
+    public String toString() {
+        return "PlayedGame{" +
+                "id=" + id +
+                ", date=" + date +
+                ", number=" + number +
+                '}';
     }
 }
