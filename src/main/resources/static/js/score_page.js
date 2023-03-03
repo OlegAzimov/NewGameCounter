@@ -63,19 +63,19 @@ function allCheck() {
     localStorage.setItem("checkboxValues", JSON.stringify(checkboxValues));
 }
 
-let touchStart, touchEnd
-sidebar.addEventListener(
-    'touchstart',
-    e => (touchStart = e.targetTouches[0].clientX)
-)
-sidebar.addEventListener(
-    'touchmove',
-    e => (touchEnd = e.targetTouches[0].clientX)
-)
-sidebar.addEventListener('touchend', e => {
-    if (touchStart - touchEnd < 45) {
-        sidebar.classList.remove('visible')
-    }
-    touchStart = 0
-    touchEnd = 0
-})
+// let touchStart, touchEnd
+// sidebar.addEventListener(
+//     'touchstart',
+//     e => (touchStart = e.targetTouches[0].clientX)
+// )
+// sidebar.addEventListener(
+//     'touchmove',
+//     e => (touchEnd = e.targetTouches[0].clientX)
+// )
+// sidebar.addEventListener('touchend', e => {
+//     if (touchStart - touchEnd < 45) {
+//         sidebar.classList.remove('visible')
+//     }
+//     touchStart = 0
+//     touchEnd = 0
+// })
