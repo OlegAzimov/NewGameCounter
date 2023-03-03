@@ -1,4 +1,5 @@
 .error {
+    overflow: hidden;
     display: flex;
     gap: 15px;
     height: 100vh;

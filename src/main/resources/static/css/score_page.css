@@ -19,7 +19,6 @@
     flex-direction: column;
     width: fit-content;
     position: absolute;
-    height: 100%;
     font-size: large;
     padding: 10px 10px 30%;
 }
@@ -149,6 +148,7 @@
 
 /* user content */
 .sidebar .content {
+    overflow: scroll;
     position: absolute;
     background-image: url(../img/filter_back15.png);
     height: 100%;
@@ -211,12 +211,15 @@
     }
 
     .add_game_button {
-        margin: 0;
+        margin-bottom: 20px;
     }
 }
 @media screen and (max-width: 376px) {
     .sidebar .content {
         width: 300px;
+    }
+    .img_and_places {
+        width: 70%;
     }
 }
 
