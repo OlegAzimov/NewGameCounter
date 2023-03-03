@@ -156,12 +156,6 @@
     right: -50%; /* will be animated to left: 0, by animation */
     animation: slide 0.5s forwards;
 }
-.game-name {
-    width: 90%;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-}
 @keyframes slide {
     100% {
         right: 0;

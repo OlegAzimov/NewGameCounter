@@ -230,7 +230,9 @@ table.table td a {
     td, table > thead, .desktop, .button-p {
         display: none;
     }
-
+    .game-name {
+        width: 240px !important;
+    }
     .head-table-row {
         display: flex;
     }
@@ -275,5 +277,13 @@ table.table td a {
 @media screen and (max-width: 376px) {
     .modal-content {
         width: 20rem;
+    }
+    .game-name {
+        width: 200px !important;
+    }
+}
+@media screen and (max-width: 320px) {
+    .game-name {
+        width: 150px !important;
     }
 }

@@ -67,7 +67,12 @@ header {
     margin-top: 5%;
     margin-bottom: 2%;
 }
-
+.game-name {
+    width: 90%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
 .close {
     display: flex;
     color: #aaa;
