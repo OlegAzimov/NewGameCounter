@@ -45,7 +45,9 @@ public class EngineService {
     }
 
     public List<PlayedGame> findAllPlayedGames() {
-        return playedGameRepository.findAll();
+        List<PlayedGame> playedGames = playedGameRepository.findAll();
+        playedGames.sort(Comparator.comparing(PlayedGame::getDate).reversed());
+        return playedGames;
     }
 
     public List<Score> findAllScores() {

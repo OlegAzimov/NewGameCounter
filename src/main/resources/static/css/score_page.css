@@ -205,7 +205,9 @@
     .bar-button {
         display: flex;
     }
-
+    .buttons {
+        margin-bottom: 30px;
+    }
     .filter {
         display: none;
     }
