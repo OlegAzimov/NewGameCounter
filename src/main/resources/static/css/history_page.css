@@ -143,7 +143,10 @@ table.table td a {
     margin-top: 6px;
     font-size: 95%;
 }
-
+.show-button {
+    background: #fcf1d5;
+    color: #ffc107;
+}
 .search-box input:focus, .form-group select:focus {
     border-color: #fbdd8d;
 }
@@ -242,7 +245,7 @@ table.table td a {
     }
 
     .bi-card-list {
-        color: #e77e02;
+        color: #ffc107;
         display: flex;
     }
 

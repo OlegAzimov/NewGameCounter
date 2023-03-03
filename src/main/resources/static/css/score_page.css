@@ -18,6 +18,7 @@
 .filter, .bar-filter {
     flex-direction: column;
     width: fit-content;
+    max-width: 30%;
     position: absolute;
     height: 100%;
     font-size: large;
@@ -151,11 +152,16 @@
     position: absolute;
     background-image: url(../img/filter_back15.png);
     height: 100%;
-    width: 280px;
+    width: 310px;
     right: -50%; /* will be animated to left: 0, by animation */
     animation: slide 0.5s forwards;
 }
-
+.game-name {
+    width: 90%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
 @keyframes slide {
     100% {
         right: 0;
@@ -169,8 +175,11 @@
 @media screen and (max-width: 768px) {
     .filter {
         position: relative;
+        max-width: 40%;
     }
-
+    .add_game_button {
+        margin: 0;
+    }
     .place_images {
         display: none;
     }
@@ -180,7 +189,11 @@
         height: 100%;
 
     }
-
+    .img_and_places {
+        align-items: flex-start;
+        width: fit-content;
+        max-width: 50%;
+    }
     .score_name {
         margin-right: 1vh;
         margin-left: 2vh;
@@ -204,9 +217,17 @@
         margin: 0;
     }
 }
+@media screen and (max-width: 376px) {
+    .sidebar .content {
+        width: 300px;
+    }
+}
 
 @media screen and (max-width: 320px) {
     .sidebar .content {
         width: 250px;
+    }
+    .game-name {
+        width: 77%;
     }
 }

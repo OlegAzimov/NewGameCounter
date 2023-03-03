@@ -68,7 +68,7 @@
 
                     <input class="form-check-input" name="gameList" type="checkbox" th:value="${game.getId}"
                            th:id="${game.getId}">
-                    <label th:for="${game.getId}" th:text="${game.getGameName}"></label>
+                    <label class="game-name" th:for="${game.getId}" th:text="${game.getGameName}"></label>
                     <br>
                     <br>
                 </div>
@@ -96,10 +96,9 @@
                 <form style="color: black" th:method="POST" th:action="@{/filter}">
                     <div id="bar-checkbox-container">
                         <div th:each="game : ${games}">
-
                             <input class="form-check-input" name="gameList" type="checkbox" th:value="${game.getId}"
                                    th:id="'bar'+${game.getId}">
-                            <label th:for="${game.getId}" th:text="${game.getGameName}"></label>
+                            <label class="game-name" th:for="${game.getId}" th:text="${game.getGameName}"></label>
                             <br>
                             <br>
                         </div>
