@@ -1,12 +1,13 @@
 const sidebar = document.querySelector('.sidebar');
+const body = document.querySelector('body');
 sidebar.querySelector('.blocker').onclick = hide;
 
-function show() { // swipe right
+function show() { // click on button, swipe left
     sidebar.classList.add('visible');
     document.body.style.overflow = 'hidden';
 }
 
-function hide() { // by blocker click, swipe left, or url change
+function hide() { // by blocker click, swipe right
     sidebar.classList.remove('visible');
     document.body.style.overflow = '';
 }
@@ -63,19 +64,22 @@ function allCheck() {
     localStorage.setItem("checkboxValues", JSON.stringify(checkboxValues));
 }
 
-// let touchStart, touchEnd
-// sidebar.addEventListener(
-//     'touchstart',
-//     e => (touchStart = e.targetTouches[0].clientX)
-// )
-// sidebar.addEventListener(
-//     'touchmove',
-//     e => (touchEnd = e.targetTouches[0].clientX)
-// )
-// sidebar.addEventListener('touchend', e => {
-//     if (touchStart - touchEnd < 45) {
-//         sidebar.classList.remove('visible')
-//     }
-//     touchStart = 0
-//     touchEnd = 0
-// })
+let touchStart, touchEnd
+body.addEventListener(
+    'touchstart',
+    e => (touchStart = e.targetTouches[0].clientX)
+)
+body.addEventListener(
+    'touchmove',
+    e => (touchEnd = e.targetTouches[0].clientX)
+)
+body.addEventListener('touchend', e => {
+    if (touchStart - touchEnd < -100 && touchStart !== 0 && touchEnd !== 0) {
+        hide()
+    }
+    if (touchStart - touchEnd > 100 && touchStart !== 0 && touchEnd !== 0) {
+       show()
+    }
+    touchStart = 0
+    touchEnd = 0
+})

@@ -7,8 +7,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "score")
 public class Score {
-
-
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +23,21 @@ public class Score {
     @Column(name = "place")
     private double place;
 
+    @NotNull(message = "Добавьте очки игрока")
+    @Column(name = "score")
+    private double score;
+
+    public PlayedGame getOwner() {
+        return owner;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
 
     public int getId() {
         return id;
@@ -32,10 +45,6 @@ public class Score {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public PlayedGame getOwner() {
-        return owner;
     }
 
     public void setOwner(PlayedGame owner) {
@@ -55,7 +64,7 @@ public class Score {
     }
 
     public int getIntPlace() {
-        return (int)place;
+        return (int) place;
     }
 
     public void setPlace(double place) {
@@ -70,6 +79,7 @@ public class Score {
         return "Score{" +
                 "id=" + id +
                 ", place=" + place +
+                ", score=" + score +
                 '}';
     }
 }

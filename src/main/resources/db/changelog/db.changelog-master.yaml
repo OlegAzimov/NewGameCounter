@@ -4,10 +4,12 @@ databaseChangeLog:
   - include:
       file: db/changelog/changeset/2-create-game-user-table.yml
   - include:
+      file: db/changelog/changeset/3-add-columns-to-game-user.yml
+  - include:
       file: db/changelog/changeset/5-create-played-game-table.yml
   - include:
       file: db/changelog/changeset/6-create-played-game-table-constraint.yml
   - include:
       file: db/changelog/changeset/7-create-score-table.yml
   - include:
-      file: db/changelog/changeset/3-add-columns-to-game-user.yml
+      file: db/changelog/changeset/8-add-column-to-score-table.yml

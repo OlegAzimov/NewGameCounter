@@ -5,6 +5,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -36,7 +38,6 @@ public class PlayedGame {
     private int number;
 
 
-
     public PlayedGame(Game gameName, Date date, int number) {
         this.gameName = gameName;
         this.date = date;
@@ -54,6 +55,12 @@ public class PlayedGame {
     public List<Score> getScores() {
         scores.sort(Comparator.comparing(Score::getPlace));
         return scores;
+    }
+
+    public boolean checkDate() {
+        LocalDate date = LocalDate.parse("2023-02-20"); //TODO set correct date
+        LocalDate date1 = LocalDate.parse(this.getDate().toString());
+        return date1.isAfter(date);
     }
 
     public void setScores(List<Score> scores) {
@@ -86,6 +93,7 @@ public class PlayedGame {
 
     public PlayedGame() {
     }
+
     @Override
     public String toString() {
         return "PlayedGame{" +

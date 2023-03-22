@@ -24,7 +24,7 @@
             <a class="text1" href="/score_page">Game Counter</a>
         </div>
         <div class="logoutButton">
-            <a class="a-logout" href="/score_page"><img src="\img\sex.svg" alt="Orgy" /></a>
+            <a class="a-logout" href="/score_page"><img src="\img\sex.svg" alt="Orgy"/></a>
             <a class="btn btn-warning sex" onclick href="/score_page">Оргия</a>
             <a class="logout" href="/logout">Выйти</a>
             <a class="a-logout" href="/logout"><i class="bi bi-door-open"></i></a>
@@ -34,7 +34,8 @@
 <div class="body1">
     <div class="mainCard">
         <p th:text="${success_message}" style="font-weight: bold; color: green"></p>
-        <form class="add-form" th:method="POST" th:action="@{/main_page/addPlayedGame}" name="form" th:object="${playedGame}"
+        <form class="add-form" th:method="POST" th:action="@{/main_page/addPlayedGame}" name="form"
+              th:object="${playedGame}"
               id="addPlayedGameAndScore">
             <div class="label-select-div">
                 <label for="game">Выберете игру</label>
@@ -46,43 +47,57 @@
             </div>
             <div class="label-select-div">
                 <label for="date">Выберите дату игры </label>
-                <input oninput="checkDate()" min="2021-01-01" class="form-control" type="date" id="date" th:field="*{date}"/>
+                <input oninput="checkDate()" min="2021-01-01" class="form-control" type="date" id="date"
+                       th:field="*{date}"/>
                 <div style="color: red" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">date Error</div>
                 <div class="error-div" id="errorDate" hidden th:text="'Невалидная дата игры'">date Error
                 </div>
             </div>
             <div class="label-select-div">
                 <label for="number">Введите номер игры по счету</label>
-                <input oninput="checkNumber()" class="form-control" min="1" type="number" id="number" th:field="*{number}"/>
+                <input oninput="checkNumber()" class="form-control" min="1" type="number" id="number"
+                       th:field="*{number}"/>
                 <div style="color: red" th:if="${#fields.hasErrors('number')}" th:errors="*{number}">number Error</div>
                 <div class="error-div" id="errorNumber" hidden th:text="'Невалидный номер игры'">number Error
                 </div>
             </div>
+            <label for="place">Выберите игроков и их места</label>
             <div id="1" class="label-select-div">
-                <label for="place">Выберите игроков и их места</label>
                 <select class="form-select" name="gameUserList">
                     <option th:each="gameUser : ${gameUsers}" th:value="${gameUser.getId}" th:text="${gameUser.getName}"
                             th:placeholder="Игрок">
                     </option>
-                    <input oninput="checkPlaces()" min="1" class="form-control place"
-                           style="border: none; border-radius: 5px; margin-top: 3px" type="number"
+                    <input oninput="checkPlace(this)" min="1" class="form-control place" type="number"
                            name="place" placeholder="Место" value="1"/>
+                    <div class="error-div">
+                    </div>
+                    <input oninput="checkScore(this)" class="form-control score" type="number"
+                           name="score" placeholder="Очко"/>
+                    <div class="error-div">
+                    </div>
                 </select>
             </div>
             <div id="2" class="label-select-div">
                 <select class="form-select" id="place" name="gameUserList">
                     <option th:each="gameUser : ${gameUsers}" th:value="${gameUser.getId}"
                             th:text="${gameUser.getName}"></option>
-                    <input oninput="checkPlaces()" min="1" class="form-control place"
+                    <input oninput="checkPlace(this)" min="1" class="form-control place"
                            style="border: none; border-radius: 5px; margin-top: 3px" type="number" name="place"
                            placeholder="Место" value="2"/>
+                    <div class="error-div">
+                    </div>
+                    <input oninput="checkScore(this)" class="form-control score" type="number"
+                           name="score" placeholder="Очко"/>
+                    <div class="error-div">
+                    </div>
                 </select>
-                <div style="color: red; padding-bottom: 10px;" th:if="${user_error_message}"
+                <div class="error-div" th:if="${user_error_message}"
                      th:text="${user_error_message}">user Error
                 </div>
             </div>
         </form>
         <div class="error-div" id="errorPlaces" hidden th:text="'Невалидные номера мест'">place Error</div>
+        <div class="error-div" id="errorScores" hidden th:text="'Невалидные очки'">score Error</div>
         <div class="add-buttons">
             <a id="add" class="btn btn-warning" onclick="addField(number)" href="#add">Добавить игрока</a>
             <input class="btn btn-warning" type="submit" onclick="checkForm()" value="Добавить игру"/>

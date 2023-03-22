@@ -207,12 +207,6 @@ function mobileOpenScorePopup(button) {
 function closeScorePopup(button) {
     button.parentNode.parentNode.style.display = "none"
 }
-
-
-window.onload = function() {
-    sortByDate("asc")
-}
-
 function sortByGame(direction) {
     let tbody = document.querySelector("#table tbody")
     // get trs as array for ease of use

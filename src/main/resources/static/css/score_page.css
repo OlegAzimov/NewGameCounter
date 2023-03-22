@@ -58,7 +58,9 @@
     height: 100%;
     margin-top: 13%;
 }
-
+.div-checkbox {
+    margin: 20px 0;
+}
 .img_and_places {
     display: flex;
     align-items: center;
@@ -95,12 +97,16 @@
 }
 
 .bar-button {
-    display: none;
     height: fit-content;
     margin-top: 5%;
     margin-right: 10px;
 }
-
+.bar-buttons {
+    display: none;
+    flex-direction: column;
+    margin-top: 5px;
+    gap: 5px;
+}
 .bi-layout-text-sidebar::before {
     color: #e77e02;
     font-size: 20px;
@@ -120,7 +126,7 @@
 }
 
 .bi-clock-history::before, .bi-tools::before {
-    color: #B26129;
+    color: #e77e02;
     font-size: 20px;
 }
 
@@ -193,7 +199,6 @@
         margin-left: 2vh;
     }
 }
-
 @media screen and (max-width: 500px) {
     .history-button {
         display: none;
@@ -202,7 +207,7 @@
         width: 60%;
         max-width: none;
     }
-    .bar-button {
+    .bar-buttons {
         display: flex;
     }
     .buttons {
