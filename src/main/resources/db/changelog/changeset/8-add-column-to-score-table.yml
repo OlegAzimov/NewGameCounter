@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-score-column-in-table-score
+      author: El Sklonny
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            - columnExists:
+                columnName: score
+                tableName: score
+      changes:
+        - addColumn:
+            tableName: score
+            columns:
+              - column:
+                  name: score
+                  type: double
+                  defaultValue: 0
+                  constraints:
+                    nullable: false

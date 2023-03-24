@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -50,20 +49,12 @@ public class EngineService {
         return playedGames;
     }
 
-    public List<Score> findAllScores() {
-        return scoreRepository.findAll();
-    }
-
     public Optional<PlayedGame> findPlayedGame(Date date, Game game, int number) {
         return playedGameRepository.findPlayedGame(date, game, number).stream().findAny();
     }
 
     public List<PlayedGame> findPlayedGameByGameName(Game game) {
         return playedGameRepository.findByGameName(game);
-    }
-
-    public List<Score> findScoreByGameUser(GameUser gameUser) {
-        return scoreRepository.findByGameUserScore(gameUser);
     }
 
     public Pair<Pair<String, Integer>, String> showGameUserScores(GameUser gameUser) {
@@ -75,7 +66,7 @@ public class EngineService {
         Pair<String, Integer> userAndHowManyGames = new Pair<>(gameUser.getName(), listOfScores.size()) {
             @Override
             public String toString() {
-                return gameUser.getName()+"  "+ "("+listOfScores.size()+")";
+                return gameUser.getName() + "  " + "(" + listOfScores.size() + ")";
             }
         };
         return new Pair<>(userAndHowManyGames, dF.format(sumOfPlaces / listOfScores.size()));
@@ -106,7 +97,7 @@ public class EngineService {
         Pair<String, Integer> userAndHowManyOneGame = new Pair<>(gameUser.getName(), finalScore.size()) {
             @Override
             public String toString() {
-                return gameUser.getName()+"  "+ "("+finalScore.size()+")";
+                return gameUser.getName() + "  " + "(" + finalScore.size() + ")";
             }
         };
 

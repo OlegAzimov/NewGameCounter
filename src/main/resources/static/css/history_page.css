@@ -188,9 +188,10 @@ table.table td a {
     font-weight: 700;
 }
 
-.first-td, .second-td {
+.first-td, .second-td, .third-td {
     padding: 0.5rem 0.5rem;
     width: 50%;
+    overflow-wrap: anywhere;
 }
 
 .table-striped > div:nth-of-type(even) > .data {
