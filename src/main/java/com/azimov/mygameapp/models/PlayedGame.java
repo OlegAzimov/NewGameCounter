@@ -58,7 +58,7 @@ public class PlayedGame {
     }
 
     public boolean checkDate() {
-        LocalDate date = LocalDate.parse("2023-03-24");
+        LocalDate date = LocalDate.parse("2023-03-20");
         LocalDate date1 = LocalDate.parse(this.getDate().toString());
         return date1.isAfter(date);
     }
