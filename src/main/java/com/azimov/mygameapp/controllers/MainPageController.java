@@ -52,13 +52,15 @@ public class MainPageController {
         playedGameValidator.validate(playedGame, bindingResult);
         model3.addAttribute("score", new Score());
         model2.addAttribute("games", engineService.findAllGames());
-        if (gameUsers.size() < places.size() || bindingResult.hasErrors() ||  playedGameValidator.validate(places, scores)) {
+        if (gameUsers.size() < places.size() || bindingResult.hasErrors() ||  !playedGameValidator.validate(places, scores)) {
             if (gameUsers.size() < places.size()) {
                 model5.addAttribute("user_error_message", "Один игрок не может иметь несколько мест");
                 System.out.println("MainPageController: PLAYED GAME VALIDATE ERROR WITH MESSAGE : one user cannot have more than one place METHOD: POST URL: /addPlayedGame");
             }
             if (bindingResult.hasErrors()) {
                 System.out.println("MainPageController: PLAYED GAME VALIDATE ERROR METHOD: POST URL: /addPlayedGame");
+            }if (!playedGameValidator.validate(places, scores)) {
+                System.out.println("MainPageController: PLAYED GAME VALIDATE ERROR METHOD: POST URL: /addPlayedGame \nMessage: array of places or scores is empty ");
             }
             return "main_page";
         } else {

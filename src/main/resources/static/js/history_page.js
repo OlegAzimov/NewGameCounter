@@ -1,6 +1,5 @@
+var $rows = []
 getPagination('#table')
-// getPagination('.table-class');
-//getPagination('table');
 
 /*					PAGINATION
 - on change max rows select options fade out all rows gt option value mx = 5
@@ -19,14 +18,11 @@ var sortNumber = window.matchMedia("screen and (max-width: 500px)").matches ? so
 //     })
 // })
 function getPagination(table) {
-    var lastPage = 1;
     document.getElementById('size').innerHTML = gamesSize;
     document.getElementById('mobileSize').innerHTML = gamesSize;
     $('#maxRows')
-        .on('change', function (evt) {
+        .on('change', function () {
             //$('.paginationprev').html('');						// reset pagination
-
-            lastPage = 1;
             $('.pagination')
                 .find('li')
                 .slice(1, -1)
@@ -42,42 +38,58 @@ function getPagination(table) {
             } else {
                 $('.pagination').show();
             }
+            let allRows
+            if ($rows.length !== 0) {
+                allRows = $rows
+                $rows.forEach((el) => {
+                    // each TR in  table and not the header
+                    trnum++; // Start Counter
+                    if (trnum > maxRows) {
+                        // if tr number gt maxRows
+                        el.hide(); // fade it out
+                    }
+                    if (trnum <= maxRows) {
+                        el.show();
+                    } // else fade in Important in case if it ...
+                }); //  was fade out to fade it in
 
-            var totalRows = $(table + ' tbody tr').length; // numbers of rows
-            $(table + ' tr:gt(0)').each(function () {
-                // each TR in  table and not the header
-                trnum++; // Start Counter
-                if (trnum > maxRows) {
-                    // if tr number gt maxRows
+            } else {
+                allRows = $(table + ' tr:gt(0)')
+                $(table + ' tr:gt(0)').each(function () {
+                    // each TR in  table and not the header
+                    trnum++; // Start Counter
+                    if (trnum > maxRows) {
+                        // if tr number gt maxRows
 
-                    $(this).hide(); // fade it out
-                }
-                if (trnum <= maxRows) {
-                    $(this).show();
-                } // else fade in Important in case if it ..
-            }); //  was fade out to fade it in
-            if (totalRows > maxRows) {
-                // if tr total rows gt max rows option
-                var pagenum = Math.ceil(totalRows / maxRows); // ceil total(rows/maxrows) to get ..
-                //	numbers of pages
-                for (var i = 1; i <= pagenum;) {
-                    // for each page append pagination li
-                    $('.pagination #prev')
-                        .before(
-                            // <li className="page-item active" data-page="1"><a className="page-link">1</a></li>
-                            '<li class="page-item" data-page="' +
-                            i +
-                            '">\
-                                              <a class="page-link">' +
-                            i++ +
-                            '</a>\
-                                            </li>'
-                        )
-                        .show();
-                } // end for i
-            } // end if row count > max rows
+                        $(this).hide(); // fade it out
+                    }
+                    if (trnum <= maxRows) {
+                        $(this).show();
+                    } // else fade in Important in case if it ..
+                }); //  was fade out to fade it in
+
+            }
+            var totalRows = allRows.length; // numbers of rows
+            var pagenum = Math.ceil(totalRows / maxRows); // ceil total(rows/maxrows) to get ..
+            //	numbers of pages
+            for (var i = 1; i <= pagenum;) {
+                // for each page append pagination li
+                $('.pagination #prev')
+                    .before(
+                        // <li className="page-item active" data-page="1"><a className="page-link">1</a></li>
+                        '<li class="page-item" data-page="' +
+                        i +
+                        '">\
+                                          <a class="page-link">' +
+                        i++ +
+                        '</a>\
+                                        </li>'
+                    )
+                    .show();
+            } // end for i
             $('.pagination [data-page="1"]').addClass('active'); // add active class to the first li
             $('.pagination li').on('click', function (evt) {
+                let lastPage = parseInt($('.pagination li.active').attr('data-page'))
                 // on click each page
                 evt.stopImmediatePropagation();
                 evt.preventDefault();
@@ -86,13 +98,13 @@ function getPagination(table) {
                 var maxRows = parseInt($('#maxRows').val()); // get Max Rows from select option
 
                 if (pageNum === 'prev' || pageNum < lastPage) {
-                    if (parseInt(lastPage) === 1) {
+                    if (lastPage === 1) {
                         return;
                     }
                     pageNum === 'prev' ? pageNum = --lastPage : ''
                 }
                 if (pageNum === 'next' || pageNum > lastPage) {
-                    if (parseInt(lastPage) === $('.pagination li').length - 2) {
+                    if (lastPage === $('.pagination li').length - 2) {
                         return;
                     }
                     pageNum === 'next' ? pageNum = ++lastPage : ''
@@ -104,27 +116,41 @@ function getPagination(table) {
                 $('.pagination [data-page="' + lastPage + '"]').addClass('active'); // add active class to the clicked
                 // $(this).addClass('active');					// add active class to the clicked
                 limitPagging();
-                $(table + ' tr:gt(0)').each(function () {
-                    // each tr in table not the header
-                    trIndex++; // tr index counter
-                    // if tr index gt maxRows*pageNum or lt maxRows*pageNum-maxRows fade if out
-                    if (
-                        trIndex > maxRows * pageNum ||
-                        trIndex <= maxRows * pageNum - maxRows
-                    ) {
-                        $(this).hide();
-                    } else {
-                        $(this).show();
-                    } //else fade in
-                }); // end of for each tr in table
+                if ($rows.length !== 0) {
+                    $rows.forEach((el) => {
+                        // each tr in table not the header
+                        trIndex++; // tr index counter
+                        // if tr index gt maxRows*pageNum or lt maxRows*pageNum-maxRows fade if out
+                        if (
+                            trIndex > maxRows * pageNum ||
+                            trIndex <= maxRows * pageNum - maxRows
+                        ) {
+                            el.hide();
+                        } else {
+                            el.show();
+                        }
+                    }); //  was fade out to fade it in
+                } else {
+                    $(table + ' tr:gt(0)').each(function () {
+                        // each tr in table not the header
+                        trIndex++; // tr index counter
+                        // if tr index gt maxRows*pageNum or lt maxRows*pageNum-maxRows fade if out
+                        if (
+                            trIndex > maxRows * pageNum ||
+                            trIndex <= maxRows * pageNum - maxRows
+                        ) {
+                            $(this).hide();
+                        } else {
+                            $(this).show();
+                        } //else fade in
+                    }); // end of for each tr in table
+
+                }
             }); // end of on click pagination list
             limitPagging();
         })
-        .val(10)
         .change();
-
     // end of on select change
-
     // END OF PAGINATION
 }
 
@@ -147,27 +173,10 @@ function limitPagging() {
     }
 }
 
-$(function () {
-    // Just to append id number for each row
-    $('table tr:eq(0)').prepend('<th> ID </th>');
-
-    var id = 0;
-
-    $('table tr:gt(0)').each(function () {
-        id++;
-        $(this).prepend('<td>' + id + '</td>');
-    });
-});
-
-function findData(values, searchEl) {
-    let find = false
-    values.some(value => value.includes(searchEl) ? find = true : '')
-    return find
-}
-
 $(document).ready(function () {
     // Filter table rows based on searched searchEl
     $("#search").on("keyup", function () {
+        $rows = []
         var searchEl = $(this).val().toLowerCase();
         if (searchEl === "") {
             getPagination('#table');
@@ -189,12 +198,36 @@ $(document).ready(function () {
                 if (name.search(searchEl) < 0 && data.search(searchEl) < 0 && number.search(searchEl) < 0 && !findData(values, searchEl)) {
                     $row.hide();
                 } else {
+                    $rows.push($row)
                     $row.show();
                 }
             });
+            if ($rows.length !== 0) {
+                getPagination('#table');
+            } else {
+                $('.pagination').hide();
+            }
         }
     });
 });
+
+$(function () {
+    // Just to append id number for each row
+    $('table tr:eq(0)').prepend('<th> ID </th>');
+
+    var id = 0;
+
+    $('table tr:gt(0)').each(function () {
+        id++;
+        $(this).prepend('<td>' + id + '</td>');
+    });
+});
+
+function findData(values, searchEl) {
+    let find = false
+    values.some(value => value.includes(searchEl) ? find = true : '')
+    return find
+}
 
 function openScorePopup(button) {
     button.parentNode.childNodes[3].style.display = "flex";
@@ -207,23 +240,33 @@ function mobileOpenScorePopup(button) {
 function closeScorePopup(button) {
     button.parentNode.parentNode.style.display = "none"
 }
+
 function sortByGame(direction) {
     let tbody = document.querySelector("#table tbody")
     // get trs as array for ease of use
-    let rows = [].slice.call(tbody.querySelectorAll("tr"))
+    let rows
+    if ($rows.length !== 0) {
+        rows = $rows
+    } else {
+        rows = [].slice.call(tbody.querySelectorAll("tr"))
+    }
 
     if (direction === 'asc') {
         sortGame.classList.remove('bi-sort-alpha-down')
         sortGame.classList.add('bi-sort-alpha-up')
         rows.sort(function (a, b) {
+            $rows.length !== 0 ? a = a[0] : ''
+            $rows.length !== 0 ? b = b[0] : ''
             return (
-                (a.cells[1].innerHTML.trim().localeCompare(b.cells[1].innerHTML.trim()))
+                a.cells[1].innerHTML.trim().localeCompare(b.cells[1].innerHTML.trim())
             )
         })
     } else {
         sortGame.classList.remove('bi-sort-alpha-up')
         sortGame.classList.add('bi-sort-alpha-down')
         rows.sort(function (a, b) {
+            $rows.length !== 0 ? a = a[0] : ''
+            $rows.length !== 0 ? b = b[0] : ''
             return (
                 (b.cells[1].innerHTML.trim().localeCompare(a.cells[1].innerHTML.trim()))
             )
@@ -231,8 +274,10 @@ function sortByGame(direction) {
     }
 
     rows.forEach(function (v) {
+        $rows.length !== 0 ? v = v[0] : ''
         tbody.appendChild(v)
     })
+    getPagination('#table')
 }
 
 sortGame.addEventListener("click", () => {
@@ -251,12 +296,19 @@ function convertDate(d) {
 function sortByDate(direction) {
     let tbody = document.querySelector("#table tbody")
     // get trs as array for ease of use
-    let rows = [].slice.call(tbody.querySelectorAll("tr"))
+    let rows
+    if ($rows.length !== 0) {
+        rows = $rows
+    } else {
+        rows = [].slice.call(tbody.querySelectorAll("tr"))
+    }
 
     if (direction === 'asc') {
         sortDate.classList.remove('bi-sort-numeric-down-alt')
         sortDate.classList.add('bi-sort-numeric-up-alt')
         rows.sort(function (a, b) {
+            $rows.length !== 0 ? a = a[0] : ''
+            $rows.length !== 0 ? b = b[0] : ''
             return (
                 convertDate(b.cells[2].innerHTML) -
                 convertDate(a.cells[2].innerHTML)
@@ -266,6 +318,8 @@ function sortByDate(direction) {
         sortDate.classList.remove('bi-sort-numeric-up-alt')
         sortDate.classList.add('bi-sort-numeric-down-alt')
         rows.sort(function (a, b) {
+            $rows.length !== 0 ? a = a[0] : ''
+            $rows.length !== 0 ? b = b[0] : ''
             return (
                 convertDate(a.cells[2].innerHTML) -
                 convertDate(b.cells[2].innerHTML)
@@ -274,8 +328,10 @@ function sortByDate(direction) {
     }
 
     rows.forEach(function (v) {
+        $rows.length !== 0 ? v = v[0] : ''
         tbody.appendChild(v)
     })
+    getPagination('#table')
 }
 
 sortDate.addEventListener("click", () => {
@@ -289,20 +345,30 @@ sortDate.addEventListener("click", () => {
 function sortByNumber(direction) {
     let tbody = document.querySelector("#table tbody")
     // get trs as array for ease of use
-    let rows = [].slice.call(tbody.querySelectorAll("tr"))
+    let rows
+    if ($rows.length !== 0) {
+        rows = $rows
+    } else {
+        rows = [].slice.call(tbody.querySelectorAll("tr"))
+    }
 
     if (direction === 'asc') {
+        sortNumber.classList.remove('bi-sort-numeric-down-alt')
+        sortNumber.classList.add('bi-sort-numeric-up-alt')
         rows.sort(function (a, b) {
-            sortNumber.classList.remove('bi-sort-numeric-down-alt')
-            sortNumber.classList.add('bi-sort-numeric-up-alt')
+            $rows.length !== 0 ? a = a[0] : ''
+            $rows.length !== 0 ? b = b[0] : ''
             return (
+
                 b.cells[3].innerHTML - a.cells[3].innerHTML
             )
         })
     } else {
+        sortNumber.classList.remove('bi-sort-numeric-up-alt')
+        sortNumber.classList.add('bi-sort-numeric-down-alt')
         rows.sort(function (a, b) {
-            sortNumber.classList.remove('bi-sort-numeric-up-alt')
-            sortNumber.classList.add('bi-sort-numeric-down-alt')
+            $rows.length !== 0 ? a = a[0] : ''
+            $rows.length !== 0 ? b = b[0] : ''
             return (
                 a.cells[3].innerHTML - b.cells[3].innerHTML
             )
@@ -310,8 +376,10 @@ function sortByNumber(direction) {
     }
 
     rows.forEach(function (v) {
+        $rows.length !== 0 ? v = v[0]  : ''
         tbody.appendChild(v);
     });
+    getPagination('#table')
 }
 
 sortNumber.addEventListener("click", () => {
