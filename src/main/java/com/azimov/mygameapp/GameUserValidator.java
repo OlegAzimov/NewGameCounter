@@ -20,15 +20,22 @@ public class GameUserValidator implements Validator {
     public boolean supports(Class<?> clazz) {
         return false;
     }
-
     @Override
     public void validate(Object target, Errors errors) {
         GameUser gameUser = (GameUser) target;
-        if (gameUsersService.findUserByUsername(gameUser.getUsername()).isPresent()) {
+        validateName(gameUser.getName(), errors);
+        validateUsername(gameUser.getUsername(), errors);
+    }
+
+    public void validateUsername(String username, Errors errors) {
+        if (gameUsersService.findUserByUsername(username).isPresent()) {
             errors.rejectValue("username", "", "Пользователь с таким логином уже существует");
             System.out.println("user with the same username already exists");
         }
-        if (gameUsersService.findUserByName(gameUser.getName()).isPresent()) {
+    }
+
+    public void validateName(String name, Errors errors) {
+        if (gameUsersService.findUserByName(name).isPresent()) {
             errors.rejectValue("name", "", "Данное имя уже занято");
             System.out.println("user with the same name already exists");
         }

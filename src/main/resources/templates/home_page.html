@@ -10,6 +10,11 @@
     <link rel="shortcut icon" href="\img\dice.ico" type="image/x-icon">
     <link href="\css\home_page.css" rel="stylesheet">
     <link href="\css\app.css" rel="stylesheet">
+
+    <script>
+        const userName = "[[${userName}]]"; // Получаем значение имени из model 'userName'
+        localStorage.setItem("userName", userName);
+    </script>
 </head>
 <body background="\img\back.png">
 <header>
@@ -21,7 +26,6 @@
         <div class="logoutButton">
             <a class="a-logout" href="/score_page"><img src="\img\sex.svg" alt="Orgy" /></a>
             <a class="btn btn-warning sex" onclick href="/score_page">Оргия</a>
-            <a class="a-logout" href="/main_page"><i class="bi bi-dice-6"></i></a>
             <a class="btn btn-warning game" href="/main_page">Занести игру</a>
             <a class="a-logout" href="/profile"><i class="bi bi-person"></i></a>
             <a class="btn btn-warning profile" href="/profile">Профиль</a>
@@ -33,6 +37,7 @@
 <div class="body">
     <section class="background">
         <div class="hover">
+            <a class="btn btn-warning add-played-game-button" href="/main_page">Занести игру<i class="bi bi-dice-6"></i></a>
             <svg id="svg" class="illustration" width="438" height="548" viewBox="0 0 438 548">
                 <defs>
                     <radialGradient cx="50.0002709%" cy="50.0927553%" fx="50.0002709%" fy="50.0927553%" r="60.50407%"

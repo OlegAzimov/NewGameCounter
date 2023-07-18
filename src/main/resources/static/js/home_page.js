@@ -1,3 +1,23 @@
+let name = localStorage.getItem('userName');
+const phrases = [
+    'Ты сосал, тебя ебали',
+    'Готовь очко',
+    'Ну ты дырявый!',
+    'Качай волю',
+    'Не будь подсосником',
+    'Харе ныть, еби их',
+    'БУМ ШАКАЛАКА',
+    'Где бассейн?',
+    'Играл в тюрьму?',
+    name + ' лох, объелся блох',
+];
+
+function getRandomElementFromArray(arr) {
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    return arr[randomIndex];
+}
+
+
 var AlertBox = function (id, option) {
     this.show = function (msg) {
         var alertArea = document.querySelector(id);
@@ -33,5 +53,5 @@ var alertNoClose = new AlertBox('#alert-area', {
 
 
 document.querySelector('#svg').addEventListener('click', function () {
-    alertNoClose.show('Ты сосал, тебя ебали');
+    alertNoClose.show(getRandomElementFromArray(phrases));
 });
