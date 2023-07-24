@@ -41,10 +41,12 @@ section {
     opacity: 0;
 }
 .hover {
+    display: flex;
     width: 100%;
     height: 100%;
     animation: hover 5s ease-in-out infinite;
     animation-fill-mode: forwards;
+    flex-direction: column;
 }
 .number-one {
     transform: translateY(-10px) translateZ(0);
@@ -135,6 +137,18 @@ section {
     animation: fadeNumberDown-160 2901ms ease-in-out infinite;
     animation-delay: 5673ms;
     animation-fill-mode: forwards;
+}
+.add-played-game-button {
+    width: fit-content;
+    margin-top: 5%;
+    display: none;
+    gap: 10px;
+    color: #e77e02;
+    align-self: flex-end;
+    margin-right: 10px;
+}
+.add-played-game-button:focus{
+    color: #b03b25;
 }
 @keyframes hover {
     0% {
@@ -374,6 +388,9 @@ section {
 @media screen and (max-width: 500px){
     .illustration {
         height: 45%;
+    }
+    .add-played-game-button {
+        display: flex;
     }
 }
 @media screen and (max-width: 400px){
